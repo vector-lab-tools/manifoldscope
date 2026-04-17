@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { TabNav } from "@/components/layout/TabNav";
-import { IntrinsicDimensionField } from "@/components/operations/measure/IntrinsicDimensionField";
+import { MeasurePanel } from "@/components/operations/measure/MeasurePanel";
 import { MarketColonisationIndex } from "@/components/operations/critique/MarketColonisationIndex";
 import { AtlasStub } from "@/components/operations/atlas/AtlasStub";
 import Providers from "./providers";
@@ -30,9 +30,9 @@ function Shell() {
           <div className="space-y-6">
             <Intro
               title="Measure"
-              text="Intrinsic geometry, descriptive, geometric in output. What shape is this manifold? Phase 0 ships one operation: the Intrinsic Dimension Field, using the TwoNN estimator of Facco et al. (2017)."
+              text="Intrinsic geometry, descriptive, geometric in output. What shape is this manifold? Phase 1a ships five operations: Intrinsic Dimension Field, Curvature Estimation, Density Gradient Field, Geodesic Map, and Sampling-Bias Diagnostic."
             />
-            <IntrinsicDimensionField />
+            <MeasurePanel />
           </div>
         )}
 
