@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { TabNav } from "@/components/layout/TabNav";
 import { MeasurePanel } from "@/components/operations/measure/MeasurePanel";
-import { MarketColonisationIndex } from "@/components/operations/critique/MarketColonisationIndex";
+import { CritiquePanel } from "@/components/operations/critique/CritiquePanel";
 import { AtlasStub } from "@/components/operations/atlas/AtlasStub";
 import Providers from "./providers";
 import type { TabGroup } from "@/types/manifold";
@@ -40,9 +40,9 @@ function Shell() {
           <div className="space-y-6">
             <Intro
               title="Critique"
-              text="Ideological investigation, interpretive, readings backed by geometric evidence. Phase 0 ships one operation: the Market-Colonisation Index, whose finding renders alongside an independent Measure attestation on the same sample."
+              text="Ideological investigation, interpretive, readings backed by geometric evidence. Phase 1b ships four operations: Ideological Topography, Hegemonic Gravity Map, Market-Colonisation Index, and Normative Transition Probe. Every Critique finding renders alongside an independent Measure attestation on the same sample."
             />
-            <MarketColonisationIndex />
+            <CritiquePanel />
           </div>
         )}
 
