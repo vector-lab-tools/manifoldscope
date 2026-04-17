@@ -1,3 +1,10 @@
+> Part of the [Vector Lab](https://github.com/vector-lab-tools) — research instruments for critical vector theory.
+> [Website and map](https://vector-lab-tools.github.io) · [Org profile](https://github.com/vector-lab-tools)
+>
+> **Tier:** single-object scope. **Object:** a single manifold.
+>
+> **Sibling instruments:** [Vectorscope](https://github.com/vector-lab-tools/vectorscope) · [Theoryscope](https://github.com/vector-lab-tools/theoryscope) · [Manifold Atlas](https://github.com/vector-lab-tools/manifold-atlas) · [LLMbench](https://github.com/vector-lab-tools/LLMbench)
+
 # Manifoldscope
 
 **Intensive reading of a single manifold, in two registers.**
