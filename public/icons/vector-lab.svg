@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <title>Manifoldscope</title>
+  <!-- Single manifold patch: torus-like warped surface -->
+  <g stroke="#b8941e" fill="none" stroke-width="1.1" stroke-linecap="round">
+    <ellipse cx="32" cy="32" rx="24" ry="14" stroke-opacity="0.95"/>
+    <ellipse cx="32" cy="32" rx="9" ry="4" stroke-opacity="0.65"/>
+    <path d="M 8 32 Q 20 40, 32 40 Q 44 40, 56 32"/>
+    <path d="M 8 32 Q 20 24, 32 24 Q 44 24, 56 32"/>
+    <path d="M 20 20 Q 20 32, 20 44"/>
+    <path d="M 44 20 Q 44 32, 44 44"/>
+  </g>
+  <!-- Caliper marks indicating measurement -->
+  <g stroke="#1a1a1a" stroke-width="1" stroke-linecap="round" opacity="0.85">
+    <line x1="32" y1="10" x2="32" y2="18"/>
+    <line x1="29" y1="13" x2="35" y2="13"/>
+  </g>
+</svg>

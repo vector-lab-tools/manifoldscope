@@ -57,9 +57,28 @@ function Shell() {
         )}
       </div>
 
-      <footer className="mx-auto max-w-6xl px-6 py-8 font-sans text-caption uppercase tracking-widest text-slate">
-        Manifoldscope · Concept and Design: David M. Berry, University of Sussex ·
-        Vector Lab
+      <footer className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-8 font-sans text-caption uppercase tracking-widest text-slate">
+        <span>
+          Manifoldscope · Concept and Design: David M. Berry, University of
+          Sussex
+        </span>
+        <a
+          href="https://vector-lab-tools.github.io"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="flex items-center gap-2 hover:text-ink"
+          title="Part of the Vector Lab"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/icons/logo-mark.svg"
+            alt="Vector Lab"
+            width={20}
+            height={20}
+            className="opacity-70"
+          />
+          <span>Vector Lab</span>
+        </a>
       </footer>
     </main>
   );
