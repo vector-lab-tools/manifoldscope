@@ -12,7 +12,7 @@ Manifoldscope is a web-based research instrument for reading a single manifold i
 
 The tool is designed for critical and empirical inquiry into the manifold as medium, not for engineering evaluation. Where existing vector-geometry tools are built for engineers tuning retrieval pipelines, and where alignment-research tools are built to inspect circuits and features inside a model, Manifoldscope treats the output geometry as the object of study and asks what shape it has and what that shape does.
 
-> Manifoldscope is part of the [Vector Lab](https://github.com/dmberry) family of research instruments, alongside [Manifold Atlas](https://github.com/dmberry/manifold-atlas), [Vectorscope](https://github.com/dmberry/vectorscope), [Theoryscope](https://github.com/dmberry/theoryscope), and [LLMbench](https://github.com/dmberry/LLMbench). The five tools share an editorial design system, an open-weight-friendly methodology, and a commitment to making the geometry of meaning legible for critical analysis. They diverge in their object: Manifold Atlas compares output geometries between models, Vectorscope inspects the internals of a single open-weight model, Theoryscope maps the geometry of a corpus of theoretical texts, LLMbench reads the surface of model outputs as prose, and Manifoldscope reads a single manifold intensively as both geometric and ideological object.
+> Manifoldscope is part of the [Vector Lab](https://github.com/vector-lab-tools) family of research instruments, alongside [Manifold Atlas](https://github.com/vector-lab-tools/manifold-atlas), [Vectorscope](https://github.com/vector-lab-tools/vectorscope), [Theoryscope](https://github.com/vector-lab-tools/theoryscope), and [LLMbench](https://github.com/vector-lab-tools/LLMbench). The five tools share an editorial design system, an open-weight-friendly methodology, and a commitment to making the geometry of meaning legible for critical analysis. They diverge in their object: Manifold Atlas compares output geometries between models, Vectorscope inspects the internals of a single open-weight model, Theoryscope maps the geometry of a corpus of theoretical texts, LLMbench reads the surface of model outputs as prose, and Manifoldscope reads a single manifold intensively as both geometric and ideological object.
 
 ## Scholarly Context
 
@@ -144,7 +144,7 @@ Manifoldscope is two coordinated processes: a Python backend for the heavier num
 ### Installation
 
 ```bash
-git clone https://github.com/dmberry/manifoldscope.git
+git clone https://github.com/vector-lab-tools/manifoldscope.git
 cd manifoldscope
 npm install
 ```
@@ -299,7 +299,7 @@ Heavy visualisations (Plotly 3D scatter, Three.js persistent-homology scenes) ar
 
 ## Acknowledgements
 
-Concept and Design by David M. Berry, implemented with Claude Code 4.6. Design system adapted from the [CCS Workbench](https://github.com/dmberry/ccs-wb). Manifoldscope shares its editorial design system, geometry library, NDJSON streaming, provenance plumbing, and FastAPI proxy pattern with its sibling instruments [Vectorscope](https://github.com/dmberry/vectorscope), [Manifold Atlas](https://github.com/dmberry/manifold-atlas), [Theoryscope](https://github.com/dmberry/theoryscope), and [LLMbench](https://github.com/dmberry/LLMbench).
+Concept and Design by David M. Berry, implemented with Claude Code 4.6. Design system adapted from the [CCS Workbench](https://github.com/dmberry/ccs-wb). Manifoldscope shares its editorial design system, geometry library, NDJSON streaming, provenance plumbing, and FastAPI proxy pattern with its sibling instruments [Vectorscope](https://github.com/vector-lab-tools/vectorscope), [Manifold Atlas](https://github.com/vector-lab-tools/manifold-atlas), [Theoryscope](https://github.com/vector-lab-tools/theoryscope), and [LLMbench](https://github.com/vector-lab-tools/LLMbench).
 
 ## Licence
 
