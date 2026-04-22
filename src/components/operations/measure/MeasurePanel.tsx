@@ -7,6 +7,8 @@ import { CurvatureEstimation } from "./CurvatureEstimation";
 import { DensityGradientField } from "./DensityGradientField";
 import { GeodesicMap } from "./GeodesicMap";
 import { SamplingBiasDiagnostic } from "./SamplingBiasDiagnostic";
+import { VoidAtlas } from "./VoidAtlas";
+import { ProjectionDistortionMeter } from "./ProjectionDistortionMeter";
 import type { MeasureOperation } from "@/types/manifold";
 
 const ITEMS: readonly { id: MeasureOperation; label: string; description: string }[] = [
@@ -35,6 +37,16 @@ const ITEMS: readonly { id: MeasureOperation; label: string; description: string
     label: "Sampling Bias",
     description: "Bootstrap over TwoNN",
   },
+  {
+    id: "void_atlas",
+    label: "Void Atlas",
+    description: "H0/H1 persistent homology",
+  },
+  {
+    id: "projection_distortion",
+    label: "Projection Distortion",
+    description: "5-way projection grid + stress/trust",
+  },
 ];
 
 export function MeasurePanel() {
@@ -51,6 +63,8 @@ export function MeasurePanel() {
       {active === "density_gradient_field" && <DensityGradientField />}
       {active === "geodesic_map" && <GeodesicMap />}
       {active === "sampling_bias_diagnostic" && <SamplingBiasDiagnostic />}
+      {active === "void_atlas" && <VoidAtlas />}
+      {active === "projection_distortion" && <ProjectionDistortionMeter />}
     </div>
   );
 }

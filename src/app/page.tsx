@@ -30,7 +30,7 @@ function Shell() {
           <div className="space-y-6">
             <Intro
               title="Measure"
-              text="Intrinsic geometry, descriptive, geometric in output. What shape is this manifold? Phase 1a ships five operations: Intrinsic Dimension Field, Curvature Estimation, Density Gradient Field, Geodesic Map, and Sampling-Bias Diagnostic."
+              text="Intrinsic geometry, descriptive, geometric in output. What shape is this manifold? Phases 1a and 1a.2 ship seven operations: Intrinsic Dimension Field, Curvature Estimation, Density Gradient Field, Geodesic Map, Sampling-Bias Diagnostic, Void Atlas, and Projection-Distortion Meter."
             />
             <MeasurePanel />
           </div>

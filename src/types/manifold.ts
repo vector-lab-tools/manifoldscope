@@ -7,7 +7,9 @@ export type MeasureOperation =
   | "curvature_estimation"
   | "density_gradient_field"
   | "geodesic_map"
-  | "sampling_bias_diagnostic";
+  | "sampling_bias_diagnostic"
+  | "void_atlas"
+  | "projection_distortion";
 export type CritiqueOperation =
   | "market_colonisation_index"
   | "ideological_topography"
@@ -110,6 +112,66 @@ export type SamplingBiasResult = {
     n_valid_points: number;
   };
   parameters: { k: number; n_bootstrap: number; seed: number; estimator: string };
+  provenance: ProvenanceRecord;
+};
+
+export type PersistencePair = {
+  birth: number;
+  death: number | null;
+  lifetime: number | null;
+};
+
+export type VoidAtlasResult = {
+  operation: "void_atlas";
+  items: string[];
+  coords_3d: number[][];
+  explained_variance_ratio: number[];
+  h0: PersistencePair[];
+  h1: PersistencePair[];
+  sampled_indices: number[];
+  summary: {
+    n_points_used: number;
+    n_points_original: number;
+    downsampled: boolean;
+    max_edge_length: number | null;
+    h0_count: number;
+    h1_count: number;
+    h1_mean_lifetime: number | null;
+    h1_median_lifetime: number | null;
+    h1_max_lifetime: number | null;
+  };
+  parameters: {
+    max_dim: number;
+    max_points: number;
+    filtration: string;
+  };
+  provenance: ProvenanceRecord;
+};
+
+export type ProjectionEntry = {
+  method: "pca" | "umap" | "tsne" | "pacmap" | "isomap";
+  coords_3d: number[][];
+  stress: number | null;
+  trustworthiness: number | null;
+  notes: string;
+  available: boolean;
+};
+
+export type ProjectionDistortionResult = {
+  operation: "projection_distortion";
+  items: string[];
+  projections: ProjectionEntry[];
+  summary: {
+    n_methods_available: number;
+    n_methods_total: number;
+    best_trustworthiness_method: string | null;
+    best_trustworthiness_score: number | null;
+    lowest_stress_method: string | null;
+    lowest_stress_score: number | null;
+    highest_stress_method: string | null;
+    highest_stress_score: number | null;
+  };
+  parameters: { n_neighbors: number; metric: string };
   provenance: ProvenanceRecord;
 };
 

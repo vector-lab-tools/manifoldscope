@@ -9,6 +9,9 @@ Phase 0 + 1a + 1b exposes:
     POST /measure/density-gradient         inverse-kNN-distance density field
     POST /measure/geodesic-map             per-point geodesic-vs-cosine delta
     POST /measure/sampling-bias            bootstrap over TwoNN field
+    POST /measure/void-atlas               H0/H1 persistent homology via ripser
+    POST /measure/projection-distortion    5-way projection grid with stress +
+                                           trustworthiness
     POST /critique/market-colonisation     gradient of market vocabulary +
                                            Measure attestation
     POST /critique/ideological-topography  5 contested axes projected onto
@@ -22,8 +25,9 @@ Phase 0 + 1a + 1b exposes:
     POST /critique/grammatical-ideology    per-pair active/passive cosine gap +
                                            Measure attestation
 
-Phase 1a.2 will add Void Atlas (persistent homology) and the
-Projection-Distortion Meter.
+Phase 2a will add archaeological-and-forensic operations (training-data
+fingerprinting, temporal sedimentation, synonymic erosion, isometry and
+metric archaeology).
 """
 
 from __future__ import annotations
@@ -45,10 +49,12 @@ from operations.ideological_topography import compute_ideological_topography
 from operations.intrinsic_dimension import compute_intrinsic_dimension_field
 from operations.market_colonisation import compute_market_colonisation_index
 from operations.normative_transition import compute_normative_transition
+from operations.projection_distortion import compute_projection_distortion
 from operations.sampling_bias import compute_sampling_bias_diagnostic
+from operations.void_atlas import compute_void_atlas
 from sample.loader import AVAILABLE as AVAILABLE_SAMPLES
 
-app = FastAPI(title="Manifoldscope Backend", version="0.2.0")
+app = FastAPI(title="Manifoldscope Backend", version="0.3.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -90,6 +96,19 @@ class SamplingBiasRequest(BaseModel):
     k: int = Field(default=20, ge=3, le=200)
     n_bootstrap: int = Field(default=50, ge=5, le=500)
     seed: int = Field(default=0)
+    model_id: Optional[str] = None
+
+
+class VoidAtlasRequest(BaseModel):
+    sample_name: str = Field(default="philosophy-of-technology-v1")
+    max_dim: int = Field(default=1, ge=0, le=2)
+    max_points: int = Field(default=1000, ge=50, le=5000)
+    model_id: Optional[str] = None
+
+
+class ProjectionDistortionRequest(BaseModel):
+    sample_name: str = Field(default="philosophy-of-technology-v1")
+    n_neighbors: int = Field(default=10, ge=3, le=50)
     model_id: Optional[str] = None
 
 
@@ -137,8 +156,8 @@ async def status() -> Dict[str, Any]:
     return {
         "status": "ok",
         "tool": "manifoldscope",
-        "version": "0.2.0",
-        "phase": "1b",
+        "version": "0.3.0",
+        "phase": "1a.2",
         "samples_available": AVAILABLE_SAMPLES,
         "operations_available": {
             "measure": [
@@ -147,6 +166,8 @@ async def status() -> Dict[str, Any]:
                 "density_gradient_field",
                 "geodesic_map",
                 "sampling_bias_diagnostic",
+                "void_atlas",
+                "projection_distortion",
             ],
             "critique": [
                 "market_colonisation_index",
@@ -233,6 +254,39 @@ async def sampling_bias(req: SamplingBiasRequest) -> Dict[str, Any]:
         kwargs["model_id"] = req.model_id
     try:
         return await _dispatch(compute_sampling_bias_diagnostic, **kwargs)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/measure/void-atlas")
+async def void_atlas(req: VoidAtlasRequest) -> Dict[str, Any]:
+    kwargs: Dict[str, Any] = {
+        "sample_name": req.sample_name,
+        "max_dim": req.max_dim,
+        "max_points": req.max_points,
+    }
+    if req.model_id:
+        kwargs["model_id"] = req.model_id
+    try:
+        return await _dispatch(compute_void_atlas, **kwargs)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/measure/projection-distortion")
+async def projection_distortion(req: ProjectionDistortionRequest) -> Dict[str, Any]:
+    kwargs: Dict[str, Any] = {
+        "sample_name": req.sample_name,
+        "n_neighbors": req.n_neighbors,
+    }
+    if req.model_id:
+        kwargs["model_id"] = req.model_id
+    try:
+        return await _dispatch(compute_projection_distortion, **kwargs)
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:  # noqa: BLE001
