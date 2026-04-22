@@ -16,7 +16,11 @@ export type CritiqueOperation =
   | "hegemonic_gravity_map"
   | "normative_transition"
   | "dissensus_detector"
-  | "grammatical_ideology_probe";
+  | "grammatical_ideology_probe"
+  | "training_data_fingerprint"
+  | "temporal_sedimentation"
+  | "synonymic_erosion"
+  | "metric_archaeology";
 
 export type SummaryStatistics = {
   mean: number | null;
@@ -344,4 +348,105 @@ export type BackendStatus = {
     measure: string[];
     critique: string[];
   };
+};
+
+/* ────────────────────────────────────────────────────────────
+ *  Phase 2a — Archaeological and forensic
+ * ──────────────────────────────────────────────────────────── */
+
+export type MeasureAttestation = {
+  local_intrinsic_dimension: (number | null)[];
+  summary_statistics: SummaryStatistics;
+  estimator: string;
+  k: number;
+};
+
+export type TrainingDataFingerprintResult = {
+  operation: "training_data_fingerprint";
+  items: string[];
+  coords_3d: number[][];
+  explained_variance_ratio: number[];
+  genres: string[];
+  raw_similarities: number[][];
+  distribution: number[][];
+  aggregate_distribution: number[];
+  dominant_genre: string[];
+  per_point: { item: string; dominant_genre: string; distribution: number[] }[];
+  parameters: { k: number; temperature: number };
+  measure_attestation: MeasureAttestation;
+  provenance: ProvenanceRecord;
+};
+
+export type TemporalSedimentationResult = {
+  operation: "temporal_sedimentation";
+  items: string[];
+  coords_3d: number[][];
+  explained_variance_ratio: number[];
+  periods: string[];
+  raw_similarities: number[][];
+  distribution: number[][];
+  aggregate_distribution: number[];
+  dominant_period: string[];
+  per_point: { item: string; dominant_period: string; distribution: number[] }[];
+  parameters: { k: number; temperature: number };
+  measure_attestation: MeasureAttestation;
+  provenance: ProvenanceRecord;
+};
+
+export type SynonymicErosionPair = {
+  term_a: string;
+  term_b: string;
+  cosine: number;
+  distance: number;
+};
+
+export type SynonymicErosionResult = {
+  operation: "synonymic_erosion";
+  items: string[];
+  coords_3d: number[][];
+  explained_variance_ratio: number[];
+  per_pair: SynonymicErosionPair[];
+  sample_left_similarity: number[];
+  summary: {
+    n_pairs: number;
+    erosion_score: number;
+    mean_distance: number;
+    median_distance: number;
+    max_cosine: number;
+    min_cosine: number;
+  };
+  parameters: { k: number };
+  measure_attestation: MeasureAttestation;
+  provenance: ProvenanceRecord;
+};
+
+export type MetricArchaeologyResult = {
+  operation: "metric_archaeology";
+  items: string[];
+  coords_3d: number[][];
+  explained_variance_ratio: number[];
+  deformation_field: number[];
+  most_deformed: { item: string; deformation: number }[];
+  most_preserved: { item: string; deformation: number }[];
+  procrustes: {
+    residual: number;
+    normalised_residual: number;
+    scale: number;
+  };
+  deformation_summary: {
+    k: number;
+    mean_deformation: number;
+    median_deformation: number;
+    max_deformation: number;
+    min_deformation: number;
+    fraction_fully_preserved: number;
+    fraction_fully_deformed: number;
+  };
+  parameters: {
+    k: number;
+    primary_model: string;
+    comparison_model: string;
+  };
+  measure_attestation: MeasureAttestation;
+  provenance: ProvenanceRecord;
 };

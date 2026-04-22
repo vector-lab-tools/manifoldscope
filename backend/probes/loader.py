@@ -94,6 +94,52 @@ def load_axes(path: Path) -> Tuple[Dict[str, Tuple[List[str], List[str]]], str]:
     return axes, _partiality(text)
 
 
+def load_categories(
+    path: Path,
+    block_name: str,
+    category_prefix: str = "category",
+) -> Tuple[Dict[str, List[str]], str]:
+    """Read a marker probe file (genres, periods, ...).
+
+    Expects a single fenced block whose name matches `block_name` and that
+    contains repeating stanzas of the form:
+
+        <category_prefix>: <name>
+          markers: term_1, term_2, ...
+
+    Returns (categories, partiality) where categories maps category name
+    to its marker list.
+    """
+    text = path.read_text(encoding="utf-8")
+    match = re.search(rf"```{re.escape(block_name)}\s*\n(.*?)\n```", text, re.S)
+    if not match:
+        raise ValueError(f"No ```{block_name} block in {path}")
+    body = match.group(1)
+
+    categories: Dict[str, List[str]] = {}
+    current_name: str | None = None
+
+    def _split_items(line: str) -> List[str]:
+        return [part.strip() for part in line.split(",") if part.strip()]
+
+    for raw in body.splitlines():
+        line = raw.rstrip()
+        if not line.strip():
+            continue
+        m_cat = re.match(rf"\s*{re.escape(category_prefix)}:\s*(\S+)\s*$", line)
+        if m_cat:
+            current_name = m_cat.group(1)
+            categories[current_name] = []
+            continue
+        m_markers = re.match(r"\s*markers:\s*(.+)$", line)
+        if m_markers and current_name is not None:
+            categories[current_name] = _split_items(m_markers.group(1))
+            continue
+    if not categories:
+        raise ValueError(f"No categories parsed from {path}")
+    return categories, partiality(text)
+
+
 def load_named_blocks(path: Path, names: List[str]) -> Tuple[Dict[str, List[str]], str]:
     """Read a probe file with several named fenced blocks.
 

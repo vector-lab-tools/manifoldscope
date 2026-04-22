@@ -24,10 +24,19 @@ Phase 0 + 1a + 1b exposes:
                                            Measure attestation
     POST /critique/grammatical-ideology    per-pair active/passive cosine gap +
                                            Measure attestation
+    POST /critique/training-data-fingerprint  per-concept genre distribution
+                                              over a marker probe
+    POST /critique/temporal-sedimentation     per-concept period distribution
+                                              over a marker probe
+    POST /critique/synonymic-erosion          per-pair distinction-collapse
+                                              diagnostic
+    POST /critique/metric-archaeology         two-embedder Procrustes residual
+                                              + Jaccard neighbourhood
+                                              deformation field
 
-Phase 2a will add archaeological-and-forensic operations (training-data
-fingerprinting, temporal sedimentation, synonymic erosion, isometry and
-metric archaeology).
+Phase 2b will add subaltern-geometry operations (colonial geometry probe,
+untranslatable map, social-categorical topology, labour visibility
+field).
 """
 
 from __future__ import annotations
@@ -48,13 +57,17 @@ from operations.hegemonic_gravity import compute_hegemonic_gravity_map
 from operations.ideological_topography import compute_ideological_topography
 from operations.intrinsic_dimension import compute_intrinsic_dimension_field
 from operations.market_colonisation import compute_market_colonisation_index
+from operations.metric_archaeology import compute_metric_archaeology
 from operations.normative_transition import compute_normative_transition
 from operations.projection_distortion import compute_projection_distortion
 from operations.sampling_bias import compute_sampling_bias_diagnostic
+from operations.synonymic_erosion import compute_synonymic_erosion
+from operations.temporal_sedimentation import compute_temporal_sedimentation
+from operations.training_data_fingerprint import compute_training_data_fingerprint
 from operations.void_atlas import compute_void_atlas
 from sample.loader import AVAILABLE as AVAILABLE_SAMPLES
 
-app = FastAPI(title="Manifoldscope Backend", version="0.3.1")
+app = FastAPI(title="Manifoldscope Backend", version="0.4.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -148,6 +161,33 @@ class GrammaticalIdeologyRequest(BaseModel):
     model_id: Optional[str] = None
 
 
+class TrainingDataFingerprintRequest(BaseModel):
+    sample_name: str = Field(default="philosophy-of-technology-v1")
+    k: int = Field(default=20, ge=3, le=200)
+    temperature: float = Field(default=0.1, gt=0.0, le=5.0)
+    model_id: Optional[str] = None
+
+
+class TemporalSedimentationRequest(BaseModel):
+    sample_name: str = Field(default="philosophy-of-technology-v1")
+    k: int = Field(default=20, ge=3, le=200)
+    temperature: float = Field(default=0.1, gt=0.0, le=5.0)
+    model_id: Optional[str] = None
+
+
+class SynonymicErosionRequest(BaseModel):
+    sample_name: str = Field(default="philosophy-of-technology-v1")
+    k: int = Field(default=20, ge=3, le=200)
+    model_id: Optional[str] = None
+
+
+class MetricArchaeologyRequest(BaseModel):
+    sample_name: str = Field(default="philosophy-of-technology-v1")
+    k: int = Field(default=10, ge=3, le=100)
+    model_id: Optional[str] = None
+    comparison_model_id: Optional[str] = None
+
+
 # --- routes ----------------------------------------------------------------
 
 
@@ -156,8 +196,8 @@ async def status() -> Dict[str, Any]:
     return {
         "status": "ok",
         "tool": "manifoldscope",
-        "version": "0.3.1",
-        "phase": "1a.2",
+        "version": "0.4.0",
+        "phase": "2a",
         "samples_available": AVAILABLE_SAMPLES,
         "operations_available": {
             "measure": [
@@ -176,6 +216,10 @@ async def status() -> Dict[str, Any]:
                 "normative_transition",
                 "dissensus_detector",
                 "grammatical_ideology_probe",
+                "training_data_fingerprint",
+                "temporal_sedimentation",
+                "synonymic_erosion",
+                "metric_archaeology",
             ],
         },
     }
@@ -365,6 +409,72 @@ async def grammatical_ideology(req: GrammaticalIdeologyRequest) -> Dict[str, Any
         kwargs["model_id"] = req.model_id
     try:
         return await _dispatch(compute_grammatical_ideology, **kwargs)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/critique/training-data-fingerprint")
+async def training_data_fingerprint(
+    req: TrainingDataFingerprintRequest,
+) -> Dict[str, Any]:
+    kwargs: Dict[str, Any] = {
+        "sample_name": req.sample_name,
+        "k": req.k,
+        "temperature": req.temperature,
+    }
+    if req.model_id:
+        kwargs["model_id"] = req.model_id
+    try:
+        return await _dispatch(compute_training_data_fingerprint, **kwargs)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/critique/temporal-sedimentation")
+async def temporal_sedimentation(
+    req: TemporalSedimentationRequest,
+) -> Dict[str, Any]:
+    kwargs: Dict[str, Any] = {
+        "sample_name": req.sample_name,
+        "k": req.k,
+        "temperature": req.temperature,
+    }
+    if req.model_id:
+        kwargs["model_id"] = req.model_id
+    try:
+        return await _dispatch(compute_temporal_sedimentation, **kwargs)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/critique/synonymic-erosion")
+async def synonymic_erosion(req: SynonymicErosionRequest) -> Dict[str, Any]:
+    kwargs: Dict[str, Any] = {"sample_name": req.sample_name, "k": req.k}
+    if req.model_id:
+        kwargs["model_id"] = req.model_id
+    try:
+        return await _dispatch(compute_synonymic_erosion, **kwargs)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/critique/metric-archaeology")
+async def metric_archaeology(req: MetricArchaeologyRequest) -> Dict[str, Any]:
+    kwargs: Dict[str, Any] = {"sample_name": req.sample_name, "k": req.k}
+    if req.model_id:
+        kwargs["model_id"] = req.model_id
+    if req.comparison_model_id:
+        kwargs["comparison_model_id"] = req.comparison_model_id
+    try:
+        return await _dispatch(compute_metric_archaeology, **kwargs)
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:  # noqa: BLE001
