@@ -11,7 +11,7 @@
 
 **Author:** David M. Berry
 **Institution:** University of Sussex
-**Version:** 0.3.0
+**Version:** 0.3.1
 **Date:** 17 April 2026
 **Licence:** MIT
 
@@ -284,7 +284,7 @@ Heavy visualisations (Plotly 3D scatter, Three.js persistent-homology scenes) ar
 
 - [x] **Phase 0** — Scaffold, provenance plumbing, tab shell, one Measure op (Intrinsic Dimension Field), one Critique op (Market-Colonisation Index), provenance binding card. *version 0.0.1*
 - [x] **Phase 1a** — Measure core: Curvature Estimation (Forman-Ricci), Density Gradient Field, Geodesic Map, Sampling-Bias Diagnostic. MeasurePanel sub-nav added. *version 0.1.0*
-- [x] **Phase 1a.2** — Measure core continued: Void Atlas (H0/H1 persistent homology via ripser, persistence diagram, H1 barcode), Projection-Distortion Meter (PCA / UMAP / t-SNE / PaCMAP / Isomap side-by-side grid with normalised stress and trustworthiness). New `Plot2DWrapper` for the 2D plots. *version 0.3.0*
+- [x] **Phase 1a.2** — Measure core continued: Void Atlas (H0/H1 persistent homology via ripser, persistence diagram, H1 barcode), Projection-Distortion Meter (PCA / UMAP / t-SNE / PaCMAP / Isomap side-by-side grid with normalised stress and trustworthiness). New `Plot2DWrapper` for the 2D plots. Header redone to match the LLMbench / Vector Lab family branding pattern (v0.3.1). *version 0.3.1*
 - [x] **Phase 1b** — Critique core: Ideological Topography, Hegemonic Gravity Map, Normative Transition Probe, Dissensus Detector, Grammatical Ideology Probe. CritiquePanel sub-nav added; every Critique finding carries a bound Measure attestation. *version 0.2.0*
 - [ ] **Phase 2a** — Archaeological and forensic: Training-Data Fingerprinting, Temporal Sedimentation, Synonymic Erosion, Isometry / Metric Archaeology. *version 0.3.x*
 - [ ] **Phase 2b** — Subaltern geometry: Colonial Geometry Probe, Untranslatable Map, Social-Categorical Topology, Labour Visibility Field. *version 0.4.x*

@@ -54,7 +54,7 @@ from operations.sampling_bias import compute_sampling_bias_diagnostic
 from operations.void_atlas import compute_void_atlas
 from sample.loader import AVAILABLE as AVAILABLE_SAMPLES
 
-app = FastAPI(title="Manifoldscope Backend", version="0.3.0")
+app = FastAPI(title="Manifoldscope Backend", version="0.3.1")
 
 app.add_middleware(
     CORSMiddleware,
@@ -156,7 +156,7 @@ async def status() -> Dict[str, Any]:
     return {
         "status": "ok",
         "tool": "manifoldscope",
-        "version": "0.3.0",
+        "version": "0.3.1",
         "phase": "1a.2",
         "samples_available": AVAILABLE_SAMPLES,
         "operations_available": {
