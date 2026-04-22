@@ -22,9 +22,14 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 
 
-def _partiality(text: str) -> str:
+def partiality(text: str) -> str:
+    """Extract the `## Partiality note` stanza from a probe markdown file."""
     match = re.search(r"##\s*Partiality note\s*\n(.*?)(?=\n##\s|\Z)", text, re.S)
     return match.group(1).strip() if match else ""
+
+
+# Back-compat alias (older callers used the private underscore name).
+_partiality = partiality
 
 
 def load_flat_list(path: Path) -> Tuple[List[str], str]:

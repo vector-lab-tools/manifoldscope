@@ -6,6 +6,8 @@ import { MarketColonisationIndex } from "./MarketColonisationIndex";
 import { IdeologicalTopography } from "./IdeologicalTopography";
 import { HegemonicGravityMap } from "./HegemonicGravityMap";
 import { NormativeTransitionProbe } from "./NormativeTransitionProbe";
+import { DissensusDetector } from "./DissensusDetector";
+import { GrammaticalIdeologyProbe } from "./GrammaticalIdeologyProbe";
 import type { CritiqueOperation } from "@/types/manifold";
 
 const ITEMS: readonly { id: CritiqueOperation; label: string; description: string }[] = [
@@ -29,6 +31,16 @@ const ITEMS: readonly { id: CritiqueOperation; label: string; description: strin
     label: "Normative Transition",
     description: "is/ought gradient + centroid cosine",
   },
+  {
+    id: "dissensus_detector",
+    label: "Dissensus Detector",
+    description: "Per-concept contextual volatility",
+  },
+  {
+    id: "grammatical_ideology_probe",
+    label: "Grammatical Ideology",
+    description: "Active vs passive cosine gap on curated pairs",
+  },
 ];
 
 export function CritiquePanel() {
@@ -44,6 +56,8 @@ export function CritiquePanel() {
       {active === "hegemonic_gravity_map" && <HegemonicGravityMap />}
       {active === "market_colonisation_index" && <MarketColonisationIndex />}
       {active === "normative_transition" && <NormativeTransitionProbe />}
+      {active === "dissensus_detector" && <DissensusDetector />}
+      {active === "grammatical_ideology_probe" && <GrammaticalIdeologyProbe />}
     </div>
   );
 }

@@ -2,25 +2,28 @@
 Manifoldscope backend — FastAPI server for intensive manifold reading.
 
 Phase 0 + 1a + 1b exposes:
-    GET  /status                         liveness + version + phase
-    GET  /samples                        list available samples
-    POST /measure/intrinsic-dimension    per-point TwoNN field + 3D projection
-    POST /measure/curvature              Forman-Ricci field on k-NN graph
-    POST /measure/density-gradient       inverse-kNN-distance density field
-    POST /measure/geodesic-map           per-point geodesic-vs-cosine delta
-    POST /measure/sampling-bias          bootstrap over TwoNN field
-    POST /critique/market-colonisation   gradient of market vocabulary + Measure
-                                         attestation
-    POST /critique/ideological-topography 5 contested axes projected onto sample
-                                         + Measure attestation
-    POST /critique/hegemonic-gravity     incoming-kNN attractor score
-                                         + Measure attestation
-    POST /critique/normative-transition  is/ought gradient + centroid cosine
-                                         + Measure attestation
+    GET  /status                           liveness + version + phase
+    GET  /samples                          list available samples
+    POST /measure/intrinsic-dimension      per-point TwoNN field + 3D projection
+    POST /measure/curvature                Forman-Ricci field on k-NN graph
+    POST /measure/density-gradient         inverse-kNN-distance density field
+    POST /measure/geodesic-map             per-point geodesic-vs-cosine delta
+    POST /measure/sampling-bias            bootstrap over TwoNN field
+    POST /critique/market-colonisation     gradient of market vocabulary +
+                                           Measure attestation
+    POST /critique/ideological-topography  5 contested axes projected onto
+                                           sample + Measure attestation
+    POST /critique/hegemonic-gravity       incoming-kNN attractor score +
+                                           Measure attestation
+    POST /critique/normative-transition    is/ought gradient + centroid cosine
+                                           + Measure attestation
+    POST /critique/dissensus-detector      per-point contextual spread +
+                                           Measure attestation
+    POST /critique/grammatical-ideology    per-pair active/passive cosine gap +
+                                           Measure attestation
 
 Phase 1a.2 will add Void Atlas (persistent homology) and the
-Projection-Distortion Meter. Phase 1b.2 will add Dissensus Detector and
-Grammatical Ideology Probe.
+Projection-Distortion Meter.
 """
 
 from __future__ import annotations
@@ -34,7 +37,9 @@ from pydantic import BaseModel, Field
 
 from operations.curvature import compute_curvature_estimation
 from operations.density_gradient import compute_density_gradient_field
+from operations.dissensus_detector import compute_dissensus_detector
 from operations.geodesic_map import compute_geodesic_map
+from operations.grammatical_ideology import compute_grammatical_ideology
 from operations.hegemonic_gravity import compute_hegemonic_gravity_map
 from operations.ideological_topography import compute_ideological_topography
 from operations.intrinsic_dimension import compute_intrinsic_dimension_field
@@ -112,6 +117,18 @@ class NormativeTransitionRequest(BaseModel):
     model_id: Optional[str] = None
 
 
+class DissensusDetectorRequest(BaseModel):
+    sample_name: str = Field(default="philosophy-of-technology-v1")
+    k: int = Field(default=20, ge=3, le=200)
+    model_id: Optional[str] = None
+
+
+class GrammaticalIdeologyRequest(BaseModel):
+    sample_name: str = Field(default="philosophy-of-technology-v1")
+    k: int = Field(default=20, ge=3, le=200)
+    model_id: Optional[str] = None
+
+
 # --- routes ----------------------------------------------------------------
 
 
@@ -136,6 +153,8 @@ async def status() -> Dict[str, Any]:
                 "ideological_topography",
                 "hegemonic_gravity_map",
                 "normative_transition",
+                "dissensus_detector",
+                "grammatical_ideology_probe",
             ],
         },
     }
@@ -266,6 +285,32 @@ async def normative_transition(req: NormativeTransitionRequest) -> Dict[str, Any
         kwargs["model_id"] = req.model_id
     try:
         return await _dispatch(compute_normative_transition, **kwargs)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/critique/dissensus-detector")
+async def dissensus_detector(req: DissensusDetectorRequest) -> Dict[str, Any]:
+    kwargs: Dict[str, Any] = {"sample_name": req.sample_name, "k": req.k}
+    if req.model_id:
+        kwargs["model_id"] = req.model_id
+    try:
+        return await _dispatch(compute_dissensus_detector, **kwargs)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/critique/grammatical-ideology")
+async def grammatical_ideology(req: GrammaticalIdeologyRequest) -> Dict[str, Any]:
+    kwargs: Dict[str, Any] = {"sample_name": req.sample_name, "k": req.k}
+    if req.model_id:
+        kwargs["model_id"] = req.model_id
+    try:
+        return await _dispatch(compute_grammatical_ideology, **kwargs)
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:  # noqa: BLE001

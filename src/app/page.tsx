@@ -40,7 +40,7 @@ function Shell() {
           <div className="space-y-6">
             <Intro
               title="Critique"
-              text="Ideological investigation, interpretive, readings backed by geometric evidence. Phase 1b ships four operations: Ideological Topography, Hegemonic Gravity Map, Market-Colonisation Index, and Normative Transition Probe. Every Critique finding renders alongside an independent Measure attestation on the same sample."
+              text="Ideological investigation, interpretive, readings backed by geometric evidence. Phase 1b ships six operations: Ideological Topography, Hegemonic Gravity Map, Market-Colonisation Index, Normative Transition Probe, Dissensus Detector, and Grammatical Ideology Probe. Every Critique finding renders alongside an independent Measure attestation on the same sample."
             />
             <CritiquePanel />
           </div>

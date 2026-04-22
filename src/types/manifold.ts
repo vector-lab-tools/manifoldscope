@@ -12,7 +12,9 @@ export type CritiqueOperation =
   | "market_colonisation_index"
   | "ideological_topography"
   | "hegemonic_gravity_map"
-  | "normative_transition";
+  | "normative_transition"
+  | "dissensus_detector"
+  | "grammatical_ideology_probe";
 
 export type SummaryStatistics = {
   mean: number | null;
@@ -187,6 +189,62 @@ export type NormativeTransitionResult = {
   }[];
   is_items: string[];
   ought_items: string[];
+  measure_attestation: {
+    local_intrinsic_dimension: (number | null)[];
+    summary_statistics: SummaryStatistics;
+    estimator: string;
+    k: number;
+  };
+  provenance: ProvenanceRecord;
+};
+
+export type DissensusDetectorResult = {
+  operation: "dissensus_detector";
+  items: string[];
+  coords_3d: number[][];
+  explained_variance_ratio: number[];
+  dissensus_field: number[];
+  most_volatile: { item: string; score: number }[];
+  most_stable: { item: string; score: number }[];
+  templates: string[];
+  summary: {
+    n_templates: number;
+    mean_dissensus: number;
+    median_dissensus: number;
+    max_dissensus: number;
+    min_dissensus: number;
+  };
+  measure_attestation: {
+    local_intrinsic_dimension: (number | null)[];
+    summary_statistics: SummaryStatistics;
+    estimator: string;
+    k: number;
+  };
+  provenance: ProvenanceRecord;
+};
+
+export type GrammaticalIdeologyPair = {
+  active: string;
+  passive: string;
+  cosine: number;
+  distance: number;
+};
+
+export type GrammaticalIdeologyResult = {
+  operation: "grammatical_ideology_probe";
+  items: string[];
+  coords_3d: number[][];
+  explained_variance_ratio: number[];
+  sample_active_similarity: number[];
+  per_pair: GrammaticalIdeologyPair[];
+  summary: {
+    n_pairs: number;
+    mean_distance: number;
+    median_distance: number;
+    max_distance: number;
+    min_distance: number;
+    mean_cosine: number;
+  };
   measure_attestation: {
     local_intrinsic_dimension: (number | null)[];
     summary_statistics: SummaryStatistics;

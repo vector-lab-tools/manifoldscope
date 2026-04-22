@@ -11,7 +11,7 @@
 
 **Author:** David M. Berry
 **Institution:** University of Sussex
-**Version:** 0.1.0
+**Version:** 0.2.0
 **Date:** 17 April 2026
 **Licence:** MIT
 
@@ -119,7 +119,7 @@ Manifoldscope is organised as a three-group tabbed workspace: **Measure**, **Cri
 
 All operations carry a provenance record (manifold source, sample hash, provider and model revision, metric, projection, probe list hash, timestamp) that travels with every export. The Critique tab renders a Measure attestation card alongside every reading.
 
-Phase 0 shipped **Intrinsic Dimension Field** (Measure) and **Market-Colonisation Index** (Critique), both end-to-end with provenance. Phase 1a adds four more Measure operations: **Curvature Estimation** (Forman-Ricci on k-NN graph), **Density Gradient Field** (inverse mean kNN distance in ambient space), **Geodesic Map** (Isomap geodesic-vs-cosine delta), and **Sampling-Bias Diagnostic** (bootstrap over the TwoNN field with per-point standard deviation and a stability score in the provenance record). Void Atlas and Projection-Distortion Meter land in Phase 1a.2. The remaining operations land in subsequent phases.
+Phase 0 shipped **Intrinsic Dimension Field** (Measure) and **Market-Colonisation Index** (Critique), both end-to-end with provenance. Phase 1a added four more Measure operations: **Curvature Estimation** (Forman-Ricci on k-NN graph), **Density Gradient Field** (inverse mean kNN distance in ambient space), **Geodesic Map** (Isomap geodesic-vs-cosine delta), and **Sampling-Bias Diagnostic** (bootstrap over the TwoNN field with per-point standard deviation and a stability score in the provenance record). Phase 1b completes the Critique core with five further operations, each binding a Measure attestation on the same sample: **Ideological Topography** (five contested axes projected onto the sample as per-axis heatmaps), **Hegemonic Gravity Map** (incoming-kNN attractor score per concept), **Normative Transition Probe** (is/ought gradient plus centroid cosine), **Dissensus Detector** (per-concept spread across a battery of contextual framings), and **Grammatical Ideology Probe** (per-pair active/passive cosine gap on a curated list of agency-hiding events). Void Atlas and Projection-Distortion Meter land in Phase 1a.2. The remaining operations land in subsequent phases.
 
 ## Design Rationale
 
@@ -285,7 +285,7 @@ Heavy visualisations (Plotly 3D scatter, Three.js persistent-homology scenes) ar
 - [x] **Phase 0** — Scaffold, provenance plumbing, tab shell, one Measure op (Intrinsic Dimension Field), one Critique op (Market-Colonisation Index), provenance binding card. *version 0.0.1*
 - [x] **Phase 1a** — Measure core: Curvature Estimation (Forman-Ricci), Density Gradient Field, Geodesic Map, Sampling-Bias Diagnostic. MeasurePanel sub-nav added. *version 0.1.0*
 - [ ] **Phase 1a.2** — Measure core continued: Void Atlas (persistent homology via ripser), Projection-Distortion Meter (PCA / UMAP / t-SNE / PaCMAP / Isomap side by side). *version 0.1.x*
-- [ ] **Phase 1b** — Critique core: Ideological Topography, Hegemonic Gravity Map, Normative Transition Probe, Dissensus Detector, Grammatical Ideology Probe. *version 0.2.x*
+- [x] **Phase 1b** — Critique core: Ideological Topography, Hegemonic Gravity Map, Normative Transition Probe, Dissensus Detector, Grammatical Ideology Probe. CritiquePanel sub-nav added; every Critique finding carries a bound Measure attestation. *version 0.2.0*
 - [ ] **Phase 2a** — Archaeological and forensic: Training-Data Fingerprinting, Temporal Sedimentation, Synonymic Erosion, Isometry / Metric Archaeology. *version 0.3.x*
 - [ ] **Phase 2b** — Subaltern geometry: Colonial Geometry Probe, Untranslatable Map, Social-Categorical Topology, Labour Visibility Field. *version 0.4.x*
 - [ ] **Phase 3** — Limits, refusals, absences: Archaeology of Absence, Dead Zones Map, Refusal to Represent, Commons Map, Infrastructural Probe. *version 0.5.x*
