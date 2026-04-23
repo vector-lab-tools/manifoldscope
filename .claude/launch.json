@@ -1,0 +1,16 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "manifoldscope",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "3100"],
+      "port": 3100,
+      "autoPort": false,
+      "env": {
+        "PORT": "3100",
+        "MANIFOLDSCOPE_BACKEND_URL": "http://localhost:8100"
+      }
+    }
+  ]
+}

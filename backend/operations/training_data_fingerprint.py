@@ -43,7 +43,9 @@ def compute_training_data_fingerprint(
     sample_result = embed(items, model_id=model_id)
     coords_3d, evr = pca_3d(sample_result.vectors)
 
-    categories, probe_partiality = load_categories(PROBE_FILE, "genres")
+    categories, probe_partiality = load_categories(
+        PROBE_FILE, block_name="genres", category_prefix="genre",
+    )
 
     centroids: Dict[str, np.ndarray] = {}
     all_markers: list[str] = []

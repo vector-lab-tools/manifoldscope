@@ -44,7 +44,9 @@ def compute_temporal_sedimentation(
     sample_result = embed(items, model_id=model_id)
     coords_3d, evr = pca_3d(sample_result.vectors)
 
-    categories, probe_partiality = load_categories(PROBE_FILE, "periods")
+    categories, probe_partiality = load_categories(
+        PROBE_FILE, block_name="periods", category_prefix="period",
+    )
 
     centroids: Dict[str, np.ndarray] = {}
     all_markers: list[str] = []
