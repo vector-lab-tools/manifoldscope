@@ -17,7 +17,7 @@
 
 **Author:** David M. Berry
 **Institution:** University of Sussex
-**Version:** 0.4.0
+**Version:** 0.4.1
 **Date:** 17 April 2026
 **Licence:** MIT
 
@@ -293,6 +293,7 @@ Heavy visualisations (Plotly 3D scatter, Three.js persistent-homology scenes) ar
 - [x] **Phase 1a.2** — Measure core continued: Void Atlas (H0/H1 persistent homology via ripser, persistence diagram, H1 barcode), Projection-Distortion Meter (PCA / UMAP / t-SNE / PaCMAP / Isomap side-by-side grid with normalised stress and trustworthiness). New `Plot2DWrapper` for the 2D plots. Header redone to match the LLMbench / Vector Lab family branding pattern (v0.3.1). *version 0.3.1*
 - [x] **Phase 1b** — Critique core: Ideological Topography, Hegemonic Gravity Map, Normative Transition Probe, Dissensus Detector, Grammatical Ideology Probe. CritiquePanel sub-nav added; every Critique finding carries a bound Measure attestation. *version 0.2.0*
 - [x] **Phase 2a** — Archaeological and forensic: Training-Data Fingerprinting (genre-marker probe with per-concept softmax), Temporal Sedimentation (period-marker probe with aggregate profile), Synonymic Erosion (pair-distance distinction-collapse diagnostic), Metric Archaeology (two-embedder Procrustes + Jaccard neighbourhood deformation; MiniLM vs MPNet by default). *version 0.4.0*
+- [x] **Branding pass** — Adopt the canonical Vector Lab branding (navy V mark `#0a1f44`) from the Pages repo. Family logo mark replaced (old gold wireframe-globe → navy V polygons, viewBox `5 4 54 54`); Manifoldscope tool icon retoned `#b8941e` → `#a8854d` to match the canonical bronze; `src/app/icon.svg` added as the Next App Router favicon. *version 0.4.1*
 - [ ] **Phase 2b** — Subaltern geometry: Colonial Geometry Probe, Untranslatable Map, Social-Categorical Topology, Labour Visibility Field. *version 0.4.x*
 - [ ] **Phase 3** — Limits, refusals, absences: Archaeology of Absence, Dead Zones Map, Refusal to Represent, Commons Map, Infrastructural Probe. *version 0.5.x*
 - [ ] **Phase 4** — Composition and advanced: Vectorscope export interchange, Theoryscope corpus-map import, Counter-Reading Layer, Atlas export. *version 0.6.x*
