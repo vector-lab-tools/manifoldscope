@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Hegemonic Gravity Map (Critique register, Phase 1b).
 
 Compute per-point attractor scores (number of other concepts that list this

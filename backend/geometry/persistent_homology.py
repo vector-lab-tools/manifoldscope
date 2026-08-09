@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """
 Persistent homology for Manifoldscope's Void Atlas.
 

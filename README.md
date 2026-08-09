@@ -17,9 +17,9 @@
 
 **Author:** David M. Berry
 **Institution:** University of Sussex
-**Version:** 0.4.1
-**Date:** 17 April 2026
-**Licence:** MIT
+**Version:** 0.5.0
+**Date:** 9 August 2026
+**Licence:** GPL-3.0-or-later
 
 Manifoldscope is a web-based research instrument for reading a single manifold intensively, as both a geometric object and an ideological object. It loads or imports a manifold (output embeddings from any provider, a Vectorscope hidden-state export, a Theoryscope corpus map), characterises its intrinsic geometry, and runs manifold-wide critical probes whose findings are bound to the geometric characterisation by a shared provenance record.
 
@@ -318,4 +318,6 @@ Concept and Design by David M. Berry, implemented with Claude Code 4.6. Design s
 
 ## Licence
 
-MIT
+Manifoldscope is licensed under the GNU General Public License, version 3 or (at your option) any later version (GPL-3.0-or-later). See [LICENSE](LICENSE) for the full text and [COPYRIGHT](COPYRIGHT) for the copyright notice.
+
+Manifoldscope was previously distributed under the MIT Licence (versions 0.1 through 0.4.1). As the sole copyright holder, David M. Berry relicenses all prior versions of Manifoldscope under GPL-3.0-or-later. Copies obtained under the earlier MIT terms remain valid under those terms.

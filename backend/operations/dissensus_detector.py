@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Dissensus Detector (Critique register, Phase 1b).
 
 For each concept in the sample, embeds the bare concept alongside a battery

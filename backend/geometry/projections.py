@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """
 Extra 3D projections for Manifoldscope: UMAP, t-SNE, PaCMAP, Isomap.
 

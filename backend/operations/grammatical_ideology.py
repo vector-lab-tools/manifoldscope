@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Grammatical Ideology Probe (Critique register, Phase 1b).
 
 For each curated pair of sentences expressing the same event in active vs

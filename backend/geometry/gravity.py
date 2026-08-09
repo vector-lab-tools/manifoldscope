@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """
 Hegemonic gravity: which concepts in a sample act as attractors?
 

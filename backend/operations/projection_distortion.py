@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Projection-Distortion Meter (Measure register, Phase 1a.2).
 
 Five projections side by side: PCA, UMAP, t-SNE, PaCMAP, Isomap. Each

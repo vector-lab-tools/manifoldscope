@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Void Atlas (Measure register, Phase 1a.2).
 
 Persistent homology over a Vietoris-Rips filtration of the sample.

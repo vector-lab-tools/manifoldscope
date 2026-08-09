@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Synonymic Erosion (Critique register, Phase 2a).
 
 For each curated pair of distinction-bearing terms, embed both and

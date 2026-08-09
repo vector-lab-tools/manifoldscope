@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 /**
  * Manifoldscope
  * Concept and Design: David M. Berry, University of Sussex

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """3D projection helpers. Phase 0 uses PCA only; later phases add UMAP, etc."""
 
 from __future__ import annotations

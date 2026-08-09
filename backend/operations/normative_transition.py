@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Normative Transition Probe (Critique register, Phase 1b).
 
 Measures the geometric boundary between is-vocabulary and ought-vocabulary

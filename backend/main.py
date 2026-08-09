@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """
 Manifoldscope backend — FastAPI server for intensive manifold reading.
 

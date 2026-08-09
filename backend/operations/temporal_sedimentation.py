@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Temporal Sedimentation (Critique register, Phase 2a).
 
 For each sample point, compute cosine similarity to each period&apos;s marker

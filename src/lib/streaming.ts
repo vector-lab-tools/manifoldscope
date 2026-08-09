@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 // NDJSON streaming utilities for progressive result display
 
 /**

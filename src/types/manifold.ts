@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 import type { ProvenanceRecord } from "@/lib/provenance";
 
 export type TabGroup = "measure" | "critique" | "atlas";

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Geodesic Map: cosine-vs-geodesic delta (Measure register, Phase 1a)."""
 
 from __future__ import annotations

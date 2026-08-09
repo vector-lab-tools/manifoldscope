@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Metric Archaeology (Critique register, Phase 2a).
 
 Loads the sample under two different open-weight embedders and reports:

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """
 Market-Colonisation Index (Critique register, Phase 0).
 

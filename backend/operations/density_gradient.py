@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Density Gradient Field (Measure register, Phase 1a)."""
 
 from __future__ import annotations

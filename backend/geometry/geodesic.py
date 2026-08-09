@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """
 Geodesic distance on the manifold, via Isomap shortest-path on the k-NN graph.
 

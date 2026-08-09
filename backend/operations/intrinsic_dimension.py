@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """
 Intrinsic Dimension Field (Measure register, Phase 0).
 

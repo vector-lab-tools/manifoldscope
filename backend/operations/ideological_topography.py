@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Ideological Topography (Critique register, Phase 1b).
 
 Projects a basis of contested axes onto the sample manifold. For each axis
