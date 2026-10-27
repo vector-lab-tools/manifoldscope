@@ -29,3 +29,6 @@ Thumbs.db
 # Manifoldscope caches
 backend/.cache/
 *.npy
+
+# Local scratch inbox (per-repo convention; never commit)
+_tmp/
