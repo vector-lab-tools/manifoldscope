@@ -171,17 +171,26 @@ pre code { background: none; padding: 0; }
 .topnav a:hover { color: var(--accent); }
 
 .theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
   background: transparent;
   border: 1px solid var(--rule);
   color: var(--muted);
-  padding: 5px 9px;
-  font: inherit;
-  text-transform: uppercase;
   cursor: pointer;
-  border-radius: 3px;
-  line-height: 1;
+  border-radius: 999px;
+  line-height: 0;
+}
+.theme-toggle svg {
+  transition: transform .3s ease;
 }
 .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.theme-toggle:hover svg { transform: rotate(180deg); }
+:root[data-theme="dark"] .theme-toggle svg { transform: rotate(180deg); }
+:root[data-theme="dark"] .theme-toggle:hover svg { transform: rotate(360deg); }
 
 /* Hero — two-column, collapses on mobile */
 

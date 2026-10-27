@@ -31,13 +31,15 @@
       <span>Manifold<em>scope</em></span>
     </a>
     <nav class="topnav" aria-label="Primary">
-      <a href="#about" class="hide-sm">About</a>
+      <a href="#about">About</a>
       <a href="#install">Install</a>
-      <a href="#use" class="hide-sm">Use</a>
       <a href="#api-keys">API keys</a>
-      <a href="#examples" class="hide-sm">Examples</a>
       <a href="https://github.com/vector-lab-tools/manifoldscope">GitHub</a>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle colour theme">Theme</button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle colour theme" title="Toggle light / dark theme">
+        <svg viewBox="0 0 20 20" width="14" height="14" aria-hidden="true" fill="currentColor">
+          <path d="M10 2a8 8 0 1 0 0 16A8 8 0 0 0 10 2zm0 2v12a6 6 0 0 1 0-12z"/>
+        </svg>
+      </button>
     </nav>
   </div>
 </header>
@@ -51,7 +53,8 @@
       <p class="sub">Load one model's output vectors under one sample. Measure the manifold's shape; probe its ideological grain; carry a provenance record on every finding so results can be reproduced and cited.</p>
       <div class="cta-row">
         <a class="cta primary" href="#install">Install</a>
-        <a class="cta" href="https://github.com/vector-lab-tools/manifoldscope">View on GitHub</a>
+        <a class="cta" href="#api-keys">Set up API keys</a>
+        <a class="cta" href="https://github.com/vector-lab-tools/manifoldscope">Source</a>
       </div>
     </div>
     <figure class="hero-shot">
@@ -65,7 +68,7 @@
 <section id="about">
   <div class="section-head">
     <span class="num">01 · About</span>
-    <h2>What it does</h2>
+    <h2>What Manifoldscope does.</h2>
   </div>
   <p>Manifoldscope loads a single embedding manifold — the output vectors of one model under one sample — and runs two kinds of operation against it. Every finding carries a provenance record (manifold source, sample, metric, projection, probe list, parameters) so that results can be reproduced and cited.</p>
 
@@ -91,7 +94,7 @@
 <section id="install">
   <div class="section-head">
     <span class="num">02 · Install</span>
-    <h2>Install &amp; run</h2>
+    <h2>Installing it locally.</h2>
   </div>
 
   <h4>Prerequisites</h4>
@@ -130,7 +133,7 @@ uvicorn main:app --reload --port 8000</code></pre>
 <section id="use">
   <div class="section-head">
     <span class="num">03 · Use</span>
-    <h2>A first run</h2>
+    <h2>Running your first operation.</h2>
   </div>
   <ol>
     <li>Open <a href="http://localhost:3000">localhost:3000</a>. The sample loader at the top picks the default Philosophy of Technology concept list.</li>
@@ -154,7 +157,7 @@ uvicorn main:app --reload --port 8000</code></pre>
 <section id="api-keys">
   <div class="section-head">
     <span class="num">04 · API keys</span>
-    <h2>Providers &amp; keys</h2>
+    <h2>Getting the API keys working.</h2>
   </div>
   <p>Hosted embedding providers all work the same way at a high level: register, create a key, paste the key into Manifoldscope's provider settings, pick a model. Each card below gives the key source, the key prefix, cost tier, and the one gotcha that bites first.</p>
 
@@ -264,7 +267,7 @@ ollama pull mxbai-embed-large   # 1024d, better quality</code></pre>
 <section id="examples">
   <div class="section-head">
     <span class="num">05 · Examples</span>
-    <h2>Worked examples</h2>
+    <h2>Three worked examples.</h2>
   </div>
 
   <h3>1. A philosophy-of-technology sample under OpenAI vs MiniLM</h3>
@@ -298,7 +301,7 @@ ollama pull mxbai-embed-large   # 1024d, better quality</code></pre>
 <section id="troubleshooting">
   <div class="section-head">
     <span class="num">06 · Troubleshooting</span>
-    <h2>Common gotchas</h2>
+    <h2>When something goes wrong.</h2>
   </div>
 
   <h4>"Backend offline" in the header</h4>
@@ -317,7 +320,7 @@ ollama pull mxbai-embed-large   # 1024d, better quality</code></pre>
 <section id="family">
   <div class="section-head">
     <span class="num">07 · Sibling instruments</span>
-    <h2>The Vector Lab family</h2>
+    <h2>The rest of the family.</h2>
   </div>
   <p>Manifoldscope is one of five tools in the Vector Lab. They share an editorial design system, an open-weight-friendly methodology, and a provenance plumbing pattern, and differ in their object:</p>
   <ul>
