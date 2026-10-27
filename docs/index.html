@@ -6,47 +6,67 @@
 <title>Manifoldscope — Vector Lab</title>
 <meta name="description" content="Manifoldscope is a web-based research instrument for reading a single embedding manifold intensively, as both a geometric and an ideological object. Part of the Vector Lab." />
 <link rel="icon" href="assets/logo-mark.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="style.css" />
+<script>
+  // Theme preference, applied before paint to avoid a white flash in dark mode.
+  (function () {
+    try {
+      var saved = localStorage.getItem('mscope-theme');
+      var mql = window.matchMedia('(prefers-color-scheme: dark)');
+      var theme = saved || (mql.matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
 
-<header class="site-head">
-  <div class="site-head-inner">
-    <a class="vlab" href="https://vector-lab-tools.github.io">
-      <img src="assets/vector-lab.svg" alt="" />
-      <span>Vector Lab</span>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="wordmark" href="#top" aria-label="Manifoldscope home">
+      <img src="assets/logo-mark.svg" alt="" />
+      <span>Manifold<em>scope</em></span>
     </a>
-    <span class="sep">·</span>
-    <span class="tool">Manifoldscope</span>
-    <nav class="nav">
+    <nav class="topnav" aria-label="Primary">
+      <a href="#about" class="hide-sm">About</a>
       <a href="#install">Install</a>
-      <a href="#use">Use</a>
-      <a href="#api-keys">API Keys</a>
-      <a href="#examples">Examples</a>
-      <a href="#troubleshooting">Troubleshooting</a>
+      <a href="#use" class="hide-sm">Use</a>
+      <a href="#api-keys">API keys</a>
+      <a href="#examples" class="hide-sm">Examples</a>
       <a href="https://github.com/vector-lab-tools/manifoldscope">GitHub</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle colour theme">Theme</button>
     </nav>
   </div>
 </header>
 
-<section class="hero">
+<section class="hero" id="top">
   <div class="hero-inner">
-    <img class="mark" src="assets/logo-mark.svg" alt="Manifoldscope mark" />
     <div>
-      <p class="label">Single-model scope · Object: a single manifold</p>
-      <h1>Manifoldscope</h1>
-      <p class="lede">Intensive reading of a single embedding manifold, in two registers: as a geometric object and as an ideological object.</p>
-      <p class="meta">v0.5.0 · GPL-3.0-or-later · David M. Berry · University of Sussex</p>
-      <a class="cta" href="https://github.com/vector-lab-tools/manifoldscope">View on GitHub</a>
-      <a class="cta secondary" href="#install">Install</a>
+      <span class="eyebrow">Vector Lab · a research instrument</span>
+      <h1>Manifold<em>scope</em></h1>
+      <p class="lede">Intensive reading of a single embedding manifold, as a geometric object and as an ideological one.</p>
+      <p class="sub">Load one model's output vectors under one sample. Measure the manifold's shape; probe its ideological grain; carry a provenance record on every finding so results can be reproduced and cited.</p>
+      <div class="cta-row">
+        <a class="cta primary" href="#install">Install</a>
+        <a class="cta" href="https://github.com/vector-lab-tools/manifoldscope">View on GitHub</a>
+      </div>
     </div>
+    <figure class="hero-shot">
+      <img src="assets/screen-measure.webp" alt="Manifoldscope Measure tab with Intrinsic Dimension Field selected" width="1600" height="1000" loading="eager" />
+    </figure>
   </div>
 </section>
 
 <main>
 
-<section id="what">
-  <h2>What it does</h2>
+<section id="about">
+  <div class="section-head">
+    <span class="num">01 · About</span>
+    <h2>What it does</h2>
+  </div>
   <p>Manifoldscope loads a single embedding manifold — the output vectors of one model under one sample — and runs two kinds of operation against it. Every finding carries a provenance record (manifold source, sample, metric, projection, probe list, parameters) so that results can be reproduced and cited.</p>
 
   <div class="cards">
@@ -68,31 +88,18 @@
   </div>
 </section>
 
-<section id="screens">
-  <h2>Screenshots</h2>
-  <figure>
-    <img src="assets/screen-measure.jpg" alt="Measure tab, Intrinsic Dimension Field selected" />
-    <figcaption>Measure tab — the seven geometric operations as sub-tabs.</figcaption>
-  </figure>
-  <figure>
-    <img src="assets/screen-critique.jpg" alt="Critique tab, Ideological Topography selected" />
-    <figcaption>Critique tab — ten probes, each bound to a Measure attestation on the same sample.</figcaption>
-  </figure>
-  <figure>
-    <img src="assets/screen-atlas.jpg" alt="Atlas tab, planned entries" />
-    <figcaption>Atlas tab — curated entries land in Phase 4.</figcaption>
-  </figure>
-</section>
-
 <section id="install">
-  <h2>Install</h2>
+  <div class="section-head">
+    <span class="num">02 · Install</span>
+    <h2>Install &amp; run</h2>
+  </div>
 
   <h4>Prerequisites</h4>
   <ul>
     <li><strong>Python 3.11+</strong> for the FastAPI backend.</li>
     <li><strong>Node.js 18+</strong> (20 LTS recommended) and <strong>npm</strong>.</li>
     <li><strong>Git</strong>, to clone the repository.</li>
-    <li>For the default local embedder, nothing further: Manifoldscope ships with <code>sentence-transformers</code> and runs MiniLM out of the box. For other providers see <a href="#api-keys">API Keys</a>.</li>
+    <li>For the default local embedder, nothing further: Manifoldscope ships with <code>sentence-transformers</code> and runs MiniLM out of the box. For other providers see <a href="#api-keys">API keys</a>.</li>
   </ul>
 
   <h4>Clone and install</h4>
@@ -121,9 +128,10 @@ uvicorn main:app --reload --port 8000</code></pre>
 </section>
 
 <section id="use">
-  <h2>Use</h2>
-
-  <h3>A first run</h3>
+  <div class="section-head">
+    <span class="num">03 · Use</span>
+    <h2>A first run</h2>
+  </div>
   <ol>
     <li>Open <a href="http://localhost:3000">localhost:3000</a>. The sample loader at the top picks the default Philosophy of Technology concept list.</li>
     <li>Stay on the <strong>Measure</strong> tab, with <strong>Intrinsic Dimension</strong> selected.</li>
@@ -131,121 +139,133 @@ uvicorn main:app --reload --port 8000</code></pre>
     <li>Switch to <strong>Critique</strong>, pick <strong>Ideological Topography</strong>, and run again. The result renders alongside the Measure attestation that was computed on the same sample.</li>
   </ol>
 
-  <h3>Swap the sample</h3>
+  <h4>Swap the sample</h4>
   <p>The sample loader accepts a concept list (plain text, one concept per line), a Zotero export, a Vectorscope hidden-state export, or a Theoryscope corpus-map import. Every operation records which sample it ran against; two runs on different samples never share a provenance record.</p>
 
-  <h3>Swap the provider</h3>
-  <p>The default is a local <code>sentence-transformers</code> model (no key, no quota). To switch to a hosted embedding model, you need an API key. The next section is the detailed guide.</p>
+  <h4>Swap the provider</h4>
+  <p>The default is a local <code>sentence-transformers</code> model (no key, no quota). To switch to a hosted embedding model, see the next section.</p>
+
+  <figure>
+    <img src="assets/screen-critique.webp" alt="Manifoldscope Critique tab with Ideological Topography selected" width="1600" height="1200" loading="lazy" />
+    <figcaption>Critique tab — ten probes, each bound to a Measure attestation on the same sample.</figcaption>
+  </figure>
 </section>
 
 <section id="api-keys">
-  <h2>API keys</h2>
-  <p>Hosted embedding providers all work the same way at a high level: register, create a key, paste the key into Manifoldscope's provider settings, pick a model. The details differ enough per provider that this section walks each one.</p>
+  <div class="section-head">
+    <span class="num">04 · API keys</span>
+    <h2>Providers &amp; keys</h2>
+  </div>
+  <p>Hosted embedding providers all work the same way at a high level: register, create a key, paste the key into Manifoldscope's provider settings, pick a model. Each card below gives the key source, the key prefix, cost tier, and the one gotcha that bites first.</p>
 
   <div class="note">
     <strong>Keys are stored locally.</strong> Manifoldscope keeps provider keys in your browser (IndexedDB). Keys are never sent to the Vector Lab or to any third party; the only outbound call carrying a key is the direct request to that provider's embedding endpoint. Clearing site data for <code>localhost:3000</code> removes them.
   </div>
 
   <div class="note">
-    <strong>Current build.</strong> Phases 0–2a ship with the local <code>sentence-transformers</code> embedder enabled by default. The provider settings panel for hosted keys lands with Phase 2b (<code>v0.4.x</code>) alongside the subaltern-geometry probes. The procedures below are correct for key creation now; the in-app paste step unlocks when 2b lands. In the meantime you can experiment with Ollama (also detailed below), which needs no key.
+    <strong>Current build.</strong> Phases 0–2a ship with the local <code>sentence-transformers</code> embedder enabled by default. The in-app provider-settings panel for hosted keys lands with Phase 2b (<code>v0.4.x</code>). The procedures below are correct for key creation now; the paste step unlocks when 2b lands. Meanwhile, Ollama (below) runs locally and needs no key.
   </div>
 
-  <!-- OpenAI -->
-  <div class="provider">
-    <h3>OpenAI <span class="badge paid">Paid, no free tier</span></h3>
-    <p>Best for: <code>text-embedding-3-large</code> (3072 dims) and <code>text-embedding-3-small</code> (1536 dims).</p>
-    <ol>
-      <li>Go to <a href="https://platform.openai.com/signup">platform.openai.com/signup</a> and create an account (separate from a ChatGPT account).</li>
-      <li>Add a payment method at <a href="https://platform.openai.com/account/billing/payment-methods">Billing → Payment methods</a>. OpenAI will not issue embedding calls without one, even for small test runs.</li>
-      <li>Open <a href="https://platform.openai.com/api-keys">platform.openai.com/api-keys</a>, click <strong>Create new secret key</strong>, name it <code>manifoldscope</code>, and copy the <code>sk-...</code> value immediately — it is shown only once.</li>
-      <li>In Manifoldscope, open <strong>Settings → Providers → OpenAI</strong>, paste the key, pick a model, click <strong>Save</strong>.</li>
-    </ol>
-    <p><strong>Cost sanity check.</strong> <code>text-embedding-3-small</code> is <code>$0.02 / 1M tokens</code>; a 5,000-concept sample at ~10 tokens per concept is under one US cent. <code>text-embedding-3-large</code> is <code>$0.13 / 1M tokens</code>.</p>
+  <div class="providers">
+
+    <div class="provider">
+      <div class="provider-head">
+        <h3>OpenAI</h3>
+        <span class="badge paid">Paid</span>
+      </div>
+      <p class="where">platform.openai.com/api-keys → <code>sk-…</code></p>
+      <p class="model-hint"><code>text-embedding-3-large</code> (3072d) · <code>text-embedding-3-small</code> (1536d)</p>
+      <p class="gotcha"><strong>Gotcha:</strong> a payment method is required before any call, including the first test. New accounts also default to a $0 spend cap — raise it at <em>Billing → Limits</em>.</p>
+    </div>
+
+    <div class="provider">
+      <div class="provider-head">
+        <h3>Voyage AI</h3>
+        <span class="badge free">Free tier</span>
+      </div>
+      <p class="where">dash.voyageai.com → API Keys → <code>pa-…</code></p>
+      <p class="model-hint"><code>voyage-3-large</code> (research-grade, 1024d) · <code>voyage-3</code> (smaller)</p>
+      <p class="gotcha"><strong>Gotcha:</strong> 50M tokens / month free across all keys on the account — not per key.</p>
+    </div>
+
+    <div class="provider">
+      <div class="provider-head">
+        <h3>Google (AI Studio)</h3>
+        <span class="badge free">Free tier</span>
+      </div>
+      <p class="where">aistudio.google.com → Get API key → <code>AIza…</code></p>
+      <p class="model-hint"><code>gemini-embedding-001</code> (3072d, Matryoshka-truncatable)</p>
+      <p class="gotcha"><strong>Gotcha:</strong> use AI Studio, not Vertex. The key pins to a hidden GCP project; if it suddenly says <em>"API key not valid"</em>, the project was auto-reaped — create a new key.</p>
+    </div>
+
+    <div class="provider">
+      <div class="provider-head">
+        <h3>Cohere</h3>
+        <span class="badge free">Free tier</span>
+      </div>
+      <p class="where">dashboard.cohere.com → API Keys</p>
+      <p class="model-hint"><code>embed-english-v3.0</code> · <code>embed-multilingual-v3.0</code> (1024d)</p>
+      <p class="gotcha"><strong>Gotcha:</strong> the default key is a <em>Trial key</em>, rate-limited and non-commercial. A <em>Production key</em> requires a payment method.</p>
+    </div>
+
+    <div class="provider">
+      <div class="provider-head">
+        <h3>HuggingFace</h3>
+        <span class="badge free">Free</span>
+      </div>
+      <p class="where">huggingface.co/settings/tokens → New token → <code>hf_…</code></p>
+      <p class="model-hint">Any sentence-transformers model via Inference API (e.g. <code>BAAI/bge-m3</code>, <code>intfloat/multilingual-e5-large-instruct</code>)</p>
+      <p class="gotcha"><strong>Gotcha:</strong> first request to a model cold-starts it (30–60s). Second call is fast. Pick a popular model to minimise cold starts, or switch to Ollama.</p>
+    </div>
+
+    <div class="provider">
+      <div class="provider-head">
+        <h3>sentence-transformers</h3>
+        <span class="badge local">Local</span>
+      </div>
+      <p class="where">built in · nothing to configure</p>
+      <p class="model-hint">Default: <code>sentence-transformers/all-MiniLM-L6-v2</code> (384d). First run downloads ~90 MB to <code>~/.cache/huggingface/</code>.</p>
+      <p class="gotcha"><strong>Gotcha:</strong> to change model, edit <code>MODEL_ID</code> in <code>backend/embed/sentence_transformers.py</code> — then restart the backend.</p>
+    </div>
+
   </div>
 
-  <!-- Voyage -->
-  <div class="provider">
-    <h3>Voyage AI <span class="badge freetier">Free tier</span></h3>
-    <p>Best for: <code>voyage-3-large</code> (research-grade retrieval embeddings; 1024 dims).</p>
-    <ol>
-      <li>Register at <a href="https://dash.voyageai.com">dash.voyageai.com</a>.</li>
-      <li>Confirm the email, then open <strong>API Keys</strong> in the dashboard sidebar.</li>
-      <li>Click <strong>Create new secret key</strong>; copy the <code>pa-...</code> value.</li>
-      <li>In Manifoldscope, open <strong>Settings → Providers → Voyage</strong>, paste the key, pick <code>voyage-3-large</code> (or <code>voyage-3</code> for a smaller model).</li>
-    </ol>
-    <p>Voyage currently offers 50M tokens free per month across all keys. The dashboard shows live usage.</p>
-  </div>
-
-  <!-- Google -->
-  <div class="provider">
-    <h3>Google (AI Studio) <span class="badge freetier">Free tier</span></h3>
-    <p>Best for: <code>gemini-embedding-001</code> (3072 dims, Matryoshka-truncatable). Use Google <strong>AI Studio</strong>, not <strong>Vertex AI</strong> — Vertex needs a GCP project, billing, and service-account credentials, which is heavier than Manifoldscope needs.</p>
-    <ol>
-      <li>Sign in to <a href="https://aistudio.google.com">aistudio.google.com</a> with a Google account.</li>
-      <li>Click the <strong>Get API key</strong> button (top left).</li>
-      <li>Pick <strong>Create API key in new project</strong>. Google creates a hidden GCP project in the background; you never need to touch it.</li>
-      <li>Copy the key. It starts <code>AIza...</code>.</li>
-      <li>In Manifoldscope, open <strong>Settings → Providers → Google</strong>, paste the key, pick <code>gemini-embedding-001</code>.</li>
-    </ol>
-    <p><strong>Watch out.</strong> The key is tied to a GCP project in the background; if you later see <em>"API key not valid"</em>, the project was auto-deleted for inactivity. Create a new key.</p>
-  </div>
-
-  <!-- Cohere -->
-  <div class="provider">
-    <h3>Cohere <span class="badge freetier">Free tier (trial key)</span></h3>
-    <p>Best for: <code>embed-english-v3.0</code> (1024 dims) or <code>embed-multilingual-v3.0</code>.</p>
-    <ol>
-      <li>Register at <a href="https://dashboard.cohere.com/welcome/register">dashboard.cohere.com</a>.</li>
-      <li>In the dashboard, open <strong>API Keys</strong>.</li>
-      <li>The default key is a <em>Trial key</em>, rate-limited and non-commercial. For higher throughput, create a <em>Production key</em> (requires a payment method).</li>
-      <li>Copy the key. In Manifoldscope, open <strong>Settings → Providers → Cohere</strong>, paste it, pick a model.</li>
-    </ol>
-    <p>Cohere needs an <code>input_type</code> per call. Manifoldscope sends <code>search_document</code> for the sample and <code>search_query</code> for Critique probes.</p>
-  </div>
-
-  <!-- HuggingFace -->
-  <div class="provider">
-    <h3>HuggingFace <span class="badge freetier">Free (serverless)</span></h3>
-    <p>Best for: any sentence-transformers model hosted on the Hub via the <strong>Inference API</strong> — e.g. <code>intfloat/multilingual-e5-large-instruct</code>, <code>BAAI/bge-m3</code>, <code>nomic-ai/nomic-embed-text-v1.5</code>.</p>
-    <ol>
-      <li>Register at <a href="https://huggingface.co/join">huggingface.co/join</a>.</li>
-      <li>Go to <a href="https://huggingface.co/settings/tokens">Settings → Access Tokens</a>.</li>
-      <li>Click <strong>New token</strong>. Give it a name (<code>manifoldscope</code>), scope <strong>Read</strong>. Copy the <code>hf_...</code> value.</li>
-      <li>In Manifoldscope, open <strong>Settings → Providers → HuggingFace</strong>, paste the token, enter the model id (e.g. <code>BAAI/bge-m3</code>).</li>
-    </ol>
-    <p><strong>Watch out.</strong> The free Inference API cold-starts a model on first request; the first call for a given model can take 30–60 seconds. Subsequent calls are fast. If a cold start times out, re-run — the model is now warm.</p>
-  </div>
-
-  <!-- Ollama -->
-  <div class="provider">
-    <h3>Ollama <span class="badge local">Local, no key</span></h3>
-    <p>Best for: offline work, air-gapped machines, and avoiding provider quotas entirely. Models run on your own CPU or GPU.</p>
+  <!-- Ollama gets its own steps block because it has an environment-variable step -->
+  <div class="steps">
+    <h3>Local provider · Ollama <span class="badge local" style="vertical-align: middle;">Local</span></h3>
+    <p>Ollama runs embedding models on your own CPU or GPU. No key, no network, no quota. This is the recommended path for offline work.</p>
     <ol>
       <li>Install Ollama from <a href="https://ollama.com/download">ollama.com/download</a>.</li>
-      <li>Pull an embedding model: <code>ollama pull nomic-embed-text</code> (768 dims) or <code>ollama pull mxbai-embed-large</code> (1024 dims).</li>
-      <li>Confirm Ollama is listening: <code>curl http://localhost:11434/api/tags</code> should return the model list.</li>
-      <li>In Manifoldscope, open <strong>Settings → Providers → Ollama</strong>, leave the key blank, enter the model name.</li>
+      <li>Pull an embedding model:
+<pre><code>ollama pull nomic-embed-text    # 768d, fast
+ollama pull mxbai-embed-large   # 1024d, better quality</code></pre>
+      </li>
+      <li>Allow the browser to call Ollama from <code>localhost:3000</code>:
+<pre><code>launchctl setenv OLLAMA_ORIGINS "http://localhost:3000"
+# restart Ollama (menubar icon → Quit, then relaunch)</code></pre>
+        <p class="mono" style="font-size: 12.5px; color: var(--muted); margin: 6px 0 0;">On Linux: add <code>Environment="OLLAMA_ORIGINS=http://localhost:3000"</code> to <code>~/.config/systemd/user/ollama.service.d/override.conf</code> then <code>systemctl --user restart ollama</code>.</p>
+      </li>
+      <li>Confirm Ollama is reachable: <code>curl http://localhost:11434/api/tags</code> should return the model list.</li>
+      <li>In Manifoldscope, open <strong>Settings → Providers → Ollama</strong>, leave the key blank, enter the model name (e.g. <code>nomic-embed-text</code>).</li>
     </ol>
-    <p>Ollama is also the recommended way to run Manifoldscope without any external network dependency — the whole pipeline (sample → embedding → geometry → probes) stays on the laptop.</p>
+    <div class="note" style="margin-top: 14px;">
+      <strong>Safari users:</strong> Safari blocks mixed-origin calls from an <code>https</code> page to a plain <code>http://localhost</code> endpoint, and sometimes blocks them from <code>http://localhost</code> too. If Ollama requests silently fail in Safari, use Chrome or Firefox, or run Manifoldscope from <code>http://127.0.0.1:3000</code> (Safari treats this origin differently).
+    </div>
   </div>
 
-  <!-- Sentence-transformers -->
-  <div class="provider">
-    <h3>sentence-transformers (built-in) <span class="badge local">Local, no key</span></h3>
-    <p>Default. Nothing to configure; the backend ships with <code>sentence-transformers/all-MiniLM-L6-v2</code> (384 dims). First run downloads the model (~90 MB) to <code>~/.cache/huggingface/</code>.</p>
-    <p>To switch model, edit <code>backend/embed/sentence_transformers.py</code> and change <code>MODEL_ID</code>. Any sentence-transformers model on the Hub works.</p>
-  </div>
-
-  <h3>Which provider for which operation</h3>
+  <h4>Which provider for which operation</h4>
   <ul>
-    <li><strong>Measure</strong> operations work with any provider. For reproducible, open-weight geometry, prefer sentence-transformers or Ollama.</li>
-    <li><strong>Critique</strong> operations that bind geometry to training provenance (<em>Training-Data Fingerprinting</em>, <em>Synonymic Erosion</em>, <em>Metric Archaeology</em>) prefer open-weight backbones so that model internals can be inspected. The commercial APIs will run them, but the archaeological reading is weaker.</li>
+    <li><strong>Measure</strong> operations work with any provider. For reproducible open-weight geometry, prefer sentence-transformers or Ollama.</li>
+    <li><strong>Critique</strong> operations that bind geometry to training provenance (<em>Training-Data Fingerprinting</em>, <em>Synonymic Erosion</em>, <em>Metric Archaeology</em>) prefer open-weight backbones so model internals can be inspected. Commercial APIs will run them, but the archaeological reading is weaker.</li>
     <li><strong>Metric Archaeology</strong> needs two embedders at once; MiniLM and MPNet are the defaults.</li>
   </ul>
 </section>
 
 <section id="examples">
-  <h2>Examples</h2>
+  <div class="section-head">
+    <span class="num">05 · Examples</span>
+    <h2>Worked examples</h2>
+  </div>
 
   <h3>1. A philosophy-of-technology sample under OpenAI vs MiniLM</h3>
   <ol>
@@ -265,13 +285,21 @@ uvicorn main:app --reload --port 8000</code></pre>
   <h3>3. Market colonisation of a technical vocabulary</h3>
   <ol>
     <li>Switch to a sample of your own — e.g. an export from your Zotero collection of AI-ethics abstracts.</li>
-    <li>Open <strong>Critique → Market-Colonisation Index</strong>. The probe lists market vocabulary (<em>customer</em>, <em>product</em>, <em>market</em>, <em>return</em>, <em>asset</em>, <em>liability</em>, ...).</li>
-    <li>The gradient field shows how market vocabulary is spatially distributed across your sample's manifold; the per-concept score ranks which of your concepts have been pulled closest to the market pole.</li>
+    <li>Open <strong>Critique → Market-Colonisation Index</strong>. The probe lists market vocabulary (<em>customer</em>, <em>product</em>, <em>market</em>, <em>return</em>, <em>asset</em>, <em>liability</em>, …).</li>
+    <li>The gradient field shows how market vocabulary is distributed across your sample's manifold; the per-concept score ranks which of your concepts have been pulled closest to the market pole.</li>
   </ol>
+
+  <figure>
+    <img src="assets/screen-atlas.webp" alt="Manifoldscope Atlas tab with planned entries" width="1600" height="1200" loading="lazy" />
+    <figcaption>Atlas tab — curated entries land in Phase 4.</figcaption>
+  </figure>
 </section>
 
 <section id="troubleshooting">
-  <h2>Troubleshooting</h2>
+  <div class="section-head">
+    <span class="num">06 · Troubleshooting</span>
+    <h2>Common gotchas</h2>
+  </div>
 
   <h4>"Backend offline" in the header</h4>
   <p>The frontend cannot reach <code>http://localhost:8000</code>. Check the backend terminal, then <code>curl http://localhost:8000/health</code>. If the backend is running on a different host or port, set <code>MANIFOLDSCOPE_BACKEND_URL</code> before <code>npm run dev</code>.</p>
@@ -279,22 +307,19 @@ uvicorn main:app --reload --port 8000</code></pre>
   <h4>"ModuleNotFoundError: No module named 'ripser'"</h4>
   <p>Ripser needs a working C compiler. On macOS: <code>xcode-select --install</code>. On Debian/Ubuntu: <code>apt install build-essential</code>. Then re-run <code>./setup.sh</code>.</p>
 
-  <h4>OpenAI returns 429 even on the first call</h4>
-  <p>You added a payment method but the account's spend cap is zero. Open <a href="https://platform.openai.com/account/limits">Billing → Limits</a> and raise it. New accounts default to $0 until a limit is set.</p>
-
-  <h4>HuggingFace times out</h4>
+  <h4>HuggingFace times out on the first call</h4>
   <p>Cold start. Re-run; the second call lands on a warm instance. If the model is routinely cold, pick a more popular one (e.g. <code>sentence-transformers/all-MiniLM-L6-v2</code>) or switch to Ollama.</p>
-
-  <h4>Google key suddenly stops working</h4>
-  <p>The hidden GCP project the key was pinned to was reaped. Create a new key at AI Studio and paste it over the old one.</p>
 
   <h4>The <code>Run</code> button is disabled</h4>
   <p>No sample loaded or no provider configured. The status bar at the bottom of the window reports which of the two is missing.</p>
 </section>
 
 <section id="family">
-  <h2>Sibling instruments</h2>
-  <p>Manifoldscope is one of five tools in the Vector Lab family. They share an editorial design system, an open-weight-friendly methodology, and a provenance plumbing pattern, and differ in their object:</p>
+  <div class="section-head">
+    <span class="num">07 · Sibling instruments</span>
+    <h2>The Vector Lab family</h2>
+  </div>
+  <p>Manifoldscope is one of five tools in the Vector Lab. They share an editorial design system, an open-weight-friendly methodology, and a provenance plumbing pattern, and differ in their object:</p>
   <ul>
     <li><a href="https://github.com/vector-lab-tools/vectorscope">Vectorscope</a> — internals of a single open-weight model (hidden states, attention, residual stream).</li>
     <li><a href="https://github.com/vector-lab-tools/manifold-atlas">Manifold Atlas</a> — comparison of output geometries across many models.</li>
@@ -304,17 +329,26 @@ uvicorn main:app --reload --port 8000</code></pre>
   <p>See the <a href="https://vector-lab-tools.github.io">Vector Lab overview</a> for the map of how they fit together.</p>
 </section>
 
-<section id="licence">
-  <h2>Licence &amp; attribution</h2>
-  <p>Manifoldscope is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License, version 3 or (at your option) any later version</a> (GPL-3.0-or-later). Earlier versions (0.1–0.4.1) were distributed under the MIT Licence; as sole copyright holder, David M. Berry has relicensed all prior versions under GPL-3.0-or-later. Copies obtained under the earlier MIT terms remain valid under those terms.</p>
-  <p>Concept and design: David M. Berry, University of Sussex. Implementation with Claude Code.</p>
-</section>
-
 </main>
 
 <footer class="foot">
-  <p>Manifoldscope · <a href="https://github.com/vector-lab-tools/manifoldscope">GitHub</a> · <a href="https://github.com/vector-lab-tools/manifoldscope/issues">Issues</a> · <a href="https://vector-lab-tools.github.io">Vector Lab</a></p>
+  <p><a href="https://github.com/vector-lab-tools/manifoldscope">Manifoldscope on GitHub</a> · <a href="https://github.com/vector-lab-tools/manifoldscope/issues">Issues</a> · part of the <a href="https://vector-lab-tools.github.io">Vector Lab</a></p>
+  <p class="meta">v0.5.0 · GPL-3.0-or-later · David M. Berry · University of Sussex</p>
 </footer>
+
+<script>
+  // Theme toggle. Default (set in <head>) honours the saved preference or the OS setting.
+  (function () {
+    var btn = document.getElementById('themeToggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      var next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('mscope-theme', next); } catch (e) {}
+    });
+  })();
+</script>
 
 </body>
 </html>
