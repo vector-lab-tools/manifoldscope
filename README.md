@@ -17,8 +17,8 @@
 
 **Author:** David M. Berry
 **Institution:** University of Sussex
-**Version:** 0.5.0
-**Date:** 9 August 2026
+**Version:** 0.5.1
+**Date:** 27 October 2026
 **Licence:** GPL-3.0-or-later
 
 Manifoldscope is a web-based research instrument for reading a single manifold intensively, as both a geometric object and an ideological object. It loads or imports a manifold (output embeddings from any provider, a Vectorscope hidden-state export, a Theoryscope corpus map), characterises its intrinsic geometry, and runs manifold-wide critical probes whose findings are bound to the geometric characterisation by a shared provenance record.
