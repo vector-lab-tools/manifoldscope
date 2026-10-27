@@ -20,6 +20,7 @@
 **Version:** 0.5.1
 **Date:** 27 October 2026
 **Licence:** GPL-3.0-or-later
+**DOI:** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23714913.svg)](https://doi.org/10.5281/zenodo.23714913)
 
 Manifoldscope is a web-based research instrument for reading a single manifold intensively, as both a geometric object and an ideological object. It loads or imports a manifold (output embeddings from any provider, a Vectorscope hidden-state export, a Theoryscope corpus map), characterises its intrinsic geometry, and runs manifold-wide critical probes whose findings are bound to the geometric characterisation by a shared provenance record.
 
@@ -315,6 +316,26 @@ Heavy visualisations (Plotly 3D scatter, Three.js persistent-homology scenes) ar
 ## Acknowledgements
 
 Concept and Design by David M. Berry, implemented with Claude Code 4.6. Design system adapted from the [CCS Workbench](https://github.com/dmberry/ccs-wb). Manifoldscope shares its editorial design system, geometry library, NDJSON streaming, provenance plumbing, and FastAPI proxy pattern with its sibling instruments [Vectorscope](https://github.com/vector-lab-tools/vectorscope), [Manifold Atlas](https://github.com/vector-lab-tools/manifold-atlas), [Theoryscope](https://github.com/vector-lab-tools/theoryscope), and [LLMbench](https://github.com/vector-lab-tools/LLMbench).
+
+## Citing
+
+Each GitHub release is archived at Zenodo. The concept DOI below always resolves to the latest archived version; version-specific DOIs are listed on the Zenodo record.
+
+Berry, D. M. (2026) *Manifoldscope* (Version 0.5.1) [Software]. Zenodo. [https://doi.org/10.5281/zenodo.23714913](https://doi.org/10.5281/zenodo.23714913)
+
+BibTeX:
+
+```bibtex
+@software{berry_manifoldscope_2026,
+  author  = {Berry, David M.},
+  title   = {Manifoldscope},
+  version = {0.5.1},
+  year    = {2026},
+  publisher = {Zenodo},
+  doi     = {10.5281/zenodo.23714913},
+  url     = {https://doi.org/10.5281/zenodo.23714913}
+}
+```
 
 ## Licence
 
