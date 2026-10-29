@@ -20,7 +20,6 @@
 **Version:** 0.5.1
 **Date:** 27 October 2026
 **Licence:** GPL-3.0-or-later
-**DOI:** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23714913.svg)](https://doi.org/10.5281/zenodo.23714913)
 
 Manifoldscope is a web-based research instrument for reading a single manifold intensively, as both a geometric object and an ideological object. It loads or imports a manifold (output embeddings from any provider, a Vectorscope hidden-state export, a Theoryscope corpus map), characterises its intrinsic geometry, and runs manifold-wide critical probes whose findings are bound to the geometric characterisation by a shared provenance record.
 
@@ -342,3 +341,7 @@ BibTeX:
 Manifoldscope is licensed under the GNU General Public License, version 3 or (at your option) any later version (GPL-3.0-or-later). See [LICENSE](LICENSE) for the full text and [COPYRIGHT](COPYRIGHT) for the copyright notice.
 
 Manifoldscope was previously distributed under the MIT Licence (versions 0.1 through 0.4.1). As the sole copyright holder, David M. Berry relicenses all prior versions of Manifoldscope under GPL-3.0-or-later. Copies obtained under the earlier MIT terms remain valid under those terms.
+
+---
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23714913.svg)](https://doi.org/10.5281/zenodo.23714913)
