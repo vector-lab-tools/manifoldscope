@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use Manifoldscope in your work, please cite it as below."
+title: "Manifoldscope: exploring a single manifold as a geometric object"
+abstract: >-
+  A tool to explore a single manifold, whether any embedding output or an exported
+  Vectorscope hidden-state cloud, treated as a geometric object in its own right. Part
+  of the Vector Lab family of research instruments.
+type: software
+authors:
+  - family-names: Berry
+    given-names: David M.
+    affiliation: University of Sussex
+    orcid: "https://orcid.org/0000-0002-7737-5586"
+repository-code: "https://github.com/vector-lab-tools/manifoldscope"
+license: GPL-3.0-or-later
+version: "0.5.1"
+date-released: 2026-10-29
+keywords:
+  - embeddings
+  - manifold
+  - geometry
+  - interpretability
+  - vector space
