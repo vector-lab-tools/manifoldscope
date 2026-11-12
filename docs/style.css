@@ -453,6 +453,37 @@ figcaption {
 }
 .note strong { color: var(--accent); }
 
+/* FAQ */
+
+.faq { margin-top: 10px; border-top: 1px solid var(--rule); }
+.faq details { border-bottom: 1px solid var(--rule); }
+.faq summary {
+  font-family: var(--display);
+  font-size: 21px;
+  line-height: 1.3;
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 40px 16px 0;
+  position: relative;
+  color: var(--ink);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 4px;
+  top: 16px;
+  font-family: var(--mono);
+  font-size: 20px;
+  color: var(--accent);
+}
+.faq details[open] summary { color: var(--accent); }
+.faq details[open] summary::after { content: "\2212"; }
+.faq details p,
+.faq details ul { color: var(--muted); font-size: 16.5px; max-width: 74ch; margin: 0 0 16px; }
+.faq details li { margin: 6px 0; }
+.faq details strong { color: var(--ink); font-weight: 500; }
+
 /* Footer */
 
 .foot {
