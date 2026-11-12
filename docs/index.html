@@ -166,7 +166,7 @@ uvicorn main:app --reload --port 8000</code></pre>
   </div>
 
   <div class="note">
-    <strong>Current build.</strong> Phases 0–2a ship with the local <code>sentence-transformers</code> embedder enabled by default. The in-app provider-settings panel for hosted keys lands with Phase 2b (<code>v0.4.x</code>). The procedures below are correct for key creation now; the paste step unlocks when 2b lands. Meanwhile, Ollama (below) runs locally and needs no key.
+    <strong>Current build.</strong> Phases 0–2a ship with the local <code>sentence-transformers</code> embedder enabled by default. The in-app provider-settings panel for hosted keys lands with Phase 2b. The procedures below are correct for key creation now; the paste step unlocks when 2b lands. Meanwhile, Ollama (below) runs locally and needs no key.
   </div>
 
   <div class="providers">
@@ -187,7 +187,7 @@ uvicorn main:app --reload --port 8000</code></pre>
         <span class="badge free">Free tier</span>
       </div>
       <p class="where">dash.voyageai.com → API Keys → <code>pa-…</code></p>
-      <p class="model-hint"><code>voyage-3-large</code> (research-grade, 1024d) · <code>voyage-3</code> (smaller)</p>
+      <p class="model-hint"><code>voyage-3.5</code> · <code>voyage-3-large</code> · <code>voyage-3</code> (all 1024d)</p>
       <p class="gotcha"><strong>Gotcha:</strong> 50M tokens / month free across all keys on the account — not per key.</p>
     </div>
 
@@ -207,7 +207,7 @@ uvicorn main:app --reload --port 8000</code></pre>
         <span class="badge free">Free tier</span>
       </div>
       <p class="where">dashboard.cohere.com → API Keys</p>
-      <p class="model-hint"><code>embed-english-v3.0</code> · <code>embed-multilingual-v3.0</code> (1024d)</p>
+      <p class="model-hint"><code>embed-v4.0</code> · <code>embed-v3.0</code> (1024d)</p>
       <p class="gotcha"><strong>Gotcha:</strong> the default key is a <em>Trial key</em>, rate-limited and non-commercial. A <em>Production key</em> requires a payment method.</p>
     </div>
 
@@ -217,7 +217,7 @@ uvicorn main:app --reload --port 8000</code></pre>
         <span class="badge free">Free</span>
       </div>
       <p class="where">huggingface.co/settings/tokens → New token → <code>hf_…</code></p>
-      <p class="model-hint">Any sentence-transformers model via Inference API (e.g. <code>BAAI/bge-m3</code>, <code>intfloat/multilingual-e5-large-instruct</code>)</p>
+      <p class="model-hint">Any embedding model via the Inference API, e.g. <code>BAAI/bge-small-en-v1.5</code> (384d), <code>mixedbread-ai/mxbai-embed-large-v1</code>, <code>intfloat/multilingual-e5-large</code>, <code>Qwen/Qwen3-Embedding-0.6B</code> (1024d)</p>
       <p class="gotcha"><strong>Gotcha:</strong> first request to a model cold-starts it (30–60s). Second call is fast. Pick a popular model to minimise cold starts, or switch to Ollama.</p>
     </div>
 
@@ -241,7 +241,8 @@ uvicorn main:app --reload --port 8000</code></pre>
       <li>Install Ollama from <a href="https://ollama.com/download">ollama.com/download</a>.</li>
       <li>Pull an embedding model:
 <pre><code>ollama pull nomic-embed-text    # 768d, fast
-ollama pull mxbai-embed-large   # 1024d, better quality</code></pre>
+ollama pull mxbai-embed-large   # 1024d, better quality
+ollama pull embeddinggemma      # 768d, Google</code></pre>
       </li>
       <li>Allow the browser to call Ollama from <code>localhost:3000</code>:
 <pre><code>launchctl setenv OLLAMA_ORIGINS "http://localhost:3000"
