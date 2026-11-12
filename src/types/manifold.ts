@@ -345,6 +345,8 @@ export type BackendStatus = {
   version: string;
   phase: string;
   samples_available: string[];
+  default_model_id?: string;
+  default_comparison_model_id?: string;
   operations_available: {
     measure: string[];
     critique: string[];

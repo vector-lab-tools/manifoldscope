@@ -10,7 +10,7 @@ import { ProvenanceBindingCard } from "@/components/binding/ProvenanceBindingCar
 import type { NormativeTransitionResult } from "@/types/manifold";
 
 export function NormativeTransitionProbe() {
-  const { sampleName, backendReachable } = useManifold();
+  const { sampleName, backendReachable, modelFields } = useManifold();
   const [result, setResult] = useState<NormativeTransitionResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +24,7 @@ export function NormativeTransitionProbe() {
         {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ sample_name: sampleName, k: 20 }),
+          body: JSON.stringify({ ...modelFields, sample_name: sampleName, k: 20 }),
         },
       );
       if (!response.ok) {
@@ -37,7 +37,7 @@ export function NormativeTransitionProbe() {
     } finally {
       setLoading(false);
     }
-  }, [sampleName]);
+  }, [sampleName, modelFields]);
 
   return (
     <section className="card-editorial p-6">

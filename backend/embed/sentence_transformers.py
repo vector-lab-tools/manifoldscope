@@ -11,6 +11,7 @@ client; the backend will continue to host the default local embedder.
 
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass
 from functools import lru_cache
 from typing import List, Tuple
@@ -18,7 +19,13 @@ from typing import List, Tuple
 import numpy as np
 
 
-DEFAULT_MODEL_ID = "sentence-transformers/all-MiniLM-L6-v2"
+DEFAULT_MODEL_ID = os.environ.get(
+    "MANIFOLDSCOPE_MODEL_ID", "sentence-transformers/all-MiniLM-L6-v2"
+)
+
+
+class ModelLoadError(ValueError):
+    pass
 
 
 @dataclass
@@ -42,7 +49,15 @@ def embed(
     model_id: str = DEFAULT_MODEL_ID,
 ) -> EmbeddingResult:
     """Embed a list of concepts with the specified open-weight model."""
-    model = _load_model(model_id)
+    model_id = model_id.strip()
+    try:
+        model = _load_model(model_id)
+    except Exception as e:  # noqa: BLE001
+        raise ModelLoadError(
+            f"Could not load embedding model '{model_id}': {e}. "
+            "Check the id on huggingface.co, or clear the Model field to use "
+            f"the default ({DEFAULT_MODEL_ID})."
+        ) from e
     vectors = model.encode(
         items,
         show_progress_bar=False,

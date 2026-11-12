@@ -66,6 +66,8 @@ from operations.synonymic_erosion import compute_synonymic_erosion
 from operations.temporal_sedimentation import compute_temporal_sedimentation
 from operations.training_data_fingerprint import compute_training_data_fingerprint
 from operations.void_atlas import compute_void_atlas
+from embed.sentence_transformers import DEFAULT_MODEL_ID, ModelLoadError
+from operations.metric_archaeology import DEFAULT_COMPARISON_MODEL
 from sample.loader import AVAILABLE as AVAILABLE_SAMPLES
 
 app = FastAPI(title="Manifoldscope Backend", version="0.4.0")
@@ -200,6 +202,8 @@ async def status() -> Dict[str, Any]:
         "version": "0.4.0",
         "phase": "2a",
         "samples_available": AVAILABLE_SAMPLES,
+        "default_model_id": DEFAULT_MODEL_ID,
+        "default_comparison_model_id": DEFAULT_COMPARISON_MODEL,
         "operations_available": {
             "measure": [
                 "intrinsic_dimension_field",

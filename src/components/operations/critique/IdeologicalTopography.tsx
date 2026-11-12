@@ -10,7 +10,7 @@ import { ProvenanceBindingCard } from "@/components/binding/ProvenanceBindingCar
 import type { IdeologicalTopographyResult } from "@/types/manifold";
 
 export function IdeologicalTopography() {
-  const { sampleName, backendReachable } = useManifold();
+  const { sampleName, backendReachable, modelFields } = useManifold();
   const [result, setResult] = useState<IdeologicalTopographyResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -25,7 +25,7 @@ export function IdeologicalTopography() {
         {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ sample_name: sampleName, k: 20 }),
+          body: JSON.stringify({ ...modelFields, sample_name: sampleName, k: 20 }),
         },
       );
       if (!response.ok) {
@@ -40,7 +40,7 @@ export function IdeologicalTopography() {
     } finally {
       setLoading(false);
     }
-  }, [sampleName]);
+  }, [sampleName, modelFields]);
 
   const current = useMemo(
     () => result?.axes.find((a) => a.name === activeAxis) ?? null,

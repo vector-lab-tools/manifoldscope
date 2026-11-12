@@ -187,9 +187,17 @@ Start the frontend in a separate terminal:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Configure at least one embedding provider in Settings. Load the default sample (Philosophy of Technology concept list) and click into the **Measure** tab to run Intrinsic Dimension Field, or the **Critique** tab to run the Market-Colonisation Index.
+Open [http://localhost:3000](http://localhost:3000). The default embedding model works without configuration. Load the default sample (Philosophy of Technology concept list) and click into the **Measure** tab to run Intrinsic Dimension Field, or the **Critique** tab to run the Market-Colonisation Index.
 
 ### Configuring Providers
+
+**Choosing a model.** Click **Model** in the header and type any sentence-transformers or Hugging Face embedding model id (for example `BAAI/bge-small-en-v1.5`). The choice is stored in your browser and sent with every run; a second field sets the comparison model for Metric Archaeology. Leave the fields blank, or click **Reset to defaults**, to go back to MiniLM and MPNet. If a model id cannot be loaded, the operation panel shows the error and the rest of the instrument keeps working. To change the backend defaults without touching code, set environment variables before starting the backend:
+
+```bash
+MANIFOLDSCOPE_MODEL_ID=BAAI/bge-small-en-v1.5 \
+MANIFOLDSCOPE_COMPARISON_MODEL_ID=intfloat/multilingual-e5-large \
+uvicorn main:app --reload --port 8000
+```
 
 Step-by-step key setup for each provider is on the [Manifoldscope docs page](https://vector-lab-tools.github.io/manifoldscope/#api-keys). For problems with API keys, local models and browser support across all the Vector Lab tools, see the [Vector Lab FAQ](https://vector-lab-tools.github.io/faq.html).
 

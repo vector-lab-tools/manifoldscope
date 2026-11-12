@@ -9,7 +9,7 @@ import { ProvenanceBadge } from "@/components/shared/ProvenanceBadge";
 import type { IntrinsicDimensionResult } from "@/types/manifold";
 
 export function IntrinsicDimensionField() {
-  const { sampleName, backendReachable } = useManifold();
+  const { sampleName, backendReachable, modelFields } = useManifold();
   const [result, setResult] = useState<IntrinsicDimensionResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +23,7 @@ export function IntrinsicDimensionField() {
         {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ sample_name: sampleName, k: 20 }),
+          body: JSON.stringify({ ...modelFields, sample_name: sampleName, k: 20 }),
         },
       );
       if (!response.ok) {
@@ -37,7 +37,7 @@ export function IntrinsicDimensionField() {
     } finally {
       setLoading(false);
     }
-  }, [sampleName]);
+  }, [sampleName, modelFields]);
 
   const validIds =
     result?.local_intrinsic_dimension.filter(

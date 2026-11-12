@@ -9,7 +9,7 @@ import { ProvenanceBadge } from "@/components/shared/ProvenanceBadge";
 import type { GeodesicMapResult } from "@/types/manifold";
 
 export function GeodesicMap() {
-  const { sampleName, backendReachable } = useManifold();
+  const { sampleName, backendReachable, modelFields } = useManifold();
   const [result, setResult] = useState<GeodesicMapResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +21,7 @@ export function GeodesicMap() {
       const response = await fetch("/api/backend/measure/geodesic-map", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ sample_name: sampleName, k: 10 }),
+        body: JSON.stringify({ ...modelFields, sample_name: sampleName, k: 10 }),
       });
       if (!response.ok) {
         const data = await response.json().catch(() => null);
@@ -33,7 +33,7 @@ export function GeodesicMap() {
     } finally {
       setLoading(false);
     }
-  }, [sampleName]);
+  }, [sampleName, modelFields]);
 
   return (
     <section className="card-editorial p-6">

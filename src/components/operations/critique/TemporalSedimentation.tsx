@@ -22,7 +22,7 @@ const PERIOD_PALETTE = [
 ];
 
 export function TemporalSedimentation() {
-  const { sampleName, backendReachable } = useManifold();
+  const { sampleName, backendReachable, modelFields } = useManifold();
   const [result, setResult] = useState<TemporalSedimentationResult | null>(
     null,
   );
@@ -39,6 +39,7 @@ export function TemporalSedimentation() {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({
+            ...modelFields,
             sample_name: sampleName,
             k: 20,
             temperature: 0.1,
@@ -55,7 +56,7 @@ export function TemporalSedimentation() {
     } finally {
       setLoading(false);
     }
-  }, [sampleName]);
+  }, [sampleName, modelFields]);
 
   const dominantIdx =
     result?.dominant_period.map((p) => result.periods.indexOf(p)) ?? [];

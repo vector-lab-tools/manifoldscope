@@ -18,6 +18,7 @@ difference.
 
 from __future__ import annotations
 
+import os
 from typing import Any, Dict
 
 import numpy as np
@@ -41,7 +42,9 @@ from provenance import (
 from sample.loader import load_sample
 
 
-DEFAULT_COMPARISON_MODEL = "sentence-transformers/all-mpnet-base-v2"
+DEFAULT_COMPARISON_MODEL = os.environ.get(
+    "MANIFOLDSCOPE_COMPARISON_MODEL_ID", "sentence-transformers/all-mpnet-base-v2"
+)
 
 
 def compute_metric_archaeology(

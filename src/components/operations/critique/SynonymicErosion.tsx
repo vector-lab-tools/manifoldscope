@@ -10,7 +10,7 @@ import { ProvenanceBindingCard } from "@/components/binding/ProvenanceBindingCar
 import type { SynonymicErosionResult } from "@/types/manifold";
 
 export function SynonymicErosion() {
-  const { sampleName, backendReachable } = useManifold();
+  const { sampleName, backendReachable, modelFields } = useManifold();
   const [result, setResult] = useState<SynonymicErosionResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +24,7 @@ export function SynonymicErosion() {
         {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ sample_name: sampleName, k: 20 }),
+          body: JSON.stringify({ ...modelFields, sample_name: sampleName, k: 20 }),
         },
       );
       if (!response.ok) {
@@ -37,7 +37,7 @@ export function SynonymicErosion() {
     } finally {
       setLoading(false);
     }
-  }, [sampleName]);
+  }, [sampleName, modelFields]);
 
   const sortedPairs = result
     ? [...result.per_pair].sort((a, b) => a.distance - b.distance)

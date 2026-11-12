@@ -10,7 +10,7 @@ import { ProvenanceBadge } from "@/components/shared/ProvenanceBadge";
 import type { VoidAtlasResult } from "@/types/manifold";
 
 export function VoidAtlas() {
-  const { sampleName, backendReachable } = useManifold();
+  const { sampleName, backendReachable, modelFields } = useManifold();
   const [result, setResult] = useState<VoidAtlasResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,6 +23,7 @@ export function VoidAtlas() {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
+          ...modelFields,
           sample_name: sampleName,
           max_dim: 1,
           max_points: 1000,
@@ -38,7 +39,7 @@ export function VoidAtlas() {
     } finally {
       setLoading(false);
     }
-  }, [sampleName]);
+  }, [sampleName, modelFields]);
 
   return (
     <section className="card-editorial p-6">

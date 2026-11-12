@@ -9,7 +9,7 @@ import { ProvenanceBadge } from "@/components/shared/ProvenanceBadge";
 import type { DensityGradientResult } from "@/types/manifold";
 
 export function DensityGradientField() {
-  const { sampleName, backendReachable } = useManifold();
+  const { sampleName, backendReachable, modelFields } = useManifold();
   const [result, setResult] = useState<DensityGradientResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +23,7 @@ export function DensityGradientField() {
         {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ sample_name: sampleName, k: 10 }),
+          body: JSON.stringify({ ...modelFields, sample_name: sampleName, k: 10 }),
         },
       );
       if (!response.ok) {
@@ -36,7 +36,7 @@ export function DensityGradientField() {
     } finally {
       setLoading(false);
     }
-  }, [sampleName]);
+  }, [sampleName, modelFields]);
 
   return (
     <section className="card-editorial p-6">

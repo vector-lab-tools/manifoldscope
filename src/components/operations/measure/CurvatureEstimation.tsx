@@ -9,7 +9,7 @@ import { ProvenanceBadge } from "@/components/shared/ProvenanceBadge";
 import type { CurvatureResult } from "@/types/manifold";
 
 export function CurvatureEstimation() {
-  const { sampleName, backendReachable } = useManifold();
+  const { sampleName, backendReachable, modelFields } = useManifold();
   const [result, setResult] = useState<CurvatureResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +21,7 @@ export function CurvatureEstimation() {
       const response = await fetch("/api/backend/measure/curvature", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ sample_name: sampleName, k: 10 }),
+        body: JSON.stringify({ ...modelFields, sample_name: sampleName, k: 10 }),
       });
       if (!response.ok) {
         const data = await response.json().catch(() => null);
@@ -33,7 +33,7 @@ export function CurvatureEstimation() {
     } finally {
       setLoading(false);
     }
-  }, [sampleName]);
+  }, [sampleName, modelFields]);
 
   return (
     <section className="card-editorial p-6">

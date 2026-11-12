@@ -9,7 +9,7 @@ import { ProvenanceBadge } from "@/components/shared/ProvenanceBadge";
 import type { SamplingBiasResult } from "@/types/manifold";
 
 export function SamplingBiasDiagnostic() {
-  const { sampleName, backendReachable } = useManifold();
+  const { sampleName, backendReachable, modelFields } = useManifold();
   const [result, setResult] = useState<SamplingBiasResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,6 +22,7 @@ export function SamplingBiasDiagnostic() {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
+          ...modelFields,
           sample_name: sampleName,
           k: 20,
           n_bootstrap: 50,
@@ -38,7 +39,7 @@ export function SamplingBiasDiagnostic() {
     } finally {
       setLoading(false);
     }
-  }, [sampleName]);
+  }, [sampleName, modelFields]);
 
   return (
     <section className="card-editorial p-6">

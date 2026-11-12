@@ -20,7 +20,7 @@ const METHOD_LABELS: Record<ProjectionEntry["method"], string> = {
 };
 
 export function ProjectionDistortionMeter() {
-  const { sampleName, backendReachable } = useManifold();
+  const { sampleName, backendReachable, modelFields } = useManifold();
   const [result, setResult] = useState<ProjectionDistortionResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -34,7 +34,7 @@ export function ProjectionDistortionMeter() {
         {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ sample_name: sampleName, n_neighbors: 10 }),
+          body: JSON.stringify({ ...modelFields, sample_name: sampleName, n_neighbors: 10 }),
         },
       );
       if (!response.ok) {
@@ -47,7 +47,7 @@ export function ProjectionDistortionMeter() {
     } finally {
       setLoading(false);
     }
-  }, [sampleName]);
+  }, [sampleName, modelFields]);
 
   const available = useMemo(
     () => result?.projections.filter((p) => p.available) ?? [],

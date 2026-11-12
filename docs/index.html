@@ -228,7 +228,7 @@ uvicorn main:app --reload --port 8000</code></pre>
       </div>
       <p class="where">built in · nothing to configure</p>
       <p class="model-hint">Default: <code>sentence-transformers/all-MiniLM-L6-v2</code> (384d). First run downloads ~90 MB to <code>~/.cache/huggingface/</code>.</p>
-      <p class="gotcha"><strong>Gotcha:</strong> to change model, edit <code>MODEL_ID</code> in <code>backend/embed/sentence_transformers.py</code> — then restart the backend.</p>
+      <p class="gotcha"><strong>Other models:</strong> click <strong>Model</strong> in the app header and type any sentence-transformers or Hugging Face model id. Blank or <em>Reset to defaults</em> returns to MiniLM. The backend default can also be set with <code>MANIFOLDSCOPE_MODEL_ID</code>.</p>
     </div>
 
   </div>

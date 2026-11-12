@@ -99,6 +99,7 @@ Open http://localhost:3000. Backend status shows green in the header when both a
 - Do not ship an operation without a provenance record.
 - Do not ship a Critique operation without a Measure attestation in its response.
 - Do not replace the sample display with a hidden constant. The sample is part of the manifold.
+- Do not ship a model picker (local or hosted provider) without a free-text field for a model id that is not on the list. Curated lists go stale when providers rename or withdraw models; the free-text field keeps the instrument usable. Today this is the header **Model** dialog (`src/components/layout/ModelDialog.tsx`), which sends `model_id` / `comparison_model_id` with every request, plus the `MANIFOLDSCOPE_MODEL_ID` and `MANIFOLDSCOPE_COMPARISON_MODEL_ID` backend env vars. When the Phase 2b hosted-provider panel lands, each provider gets the same custom-id field.
 - Do not rely on cloud LLMs for core Measure numerics. Open-weight backbones are the default for operations whose claims touch training provenance.
 - Do not attribute the open-weight / commercial-API-critique position to Castelle in drafts or docs; make the methodological point in David's own voice.
 

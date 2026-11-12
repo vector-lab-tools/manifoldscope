@@ -10,7 +10,7 @@ import { ProvenanceBindingCard } from "@/components/binding/ProvenanceBindingCar
 import type { DissensusDetectorResult } from "@/types/manifold";
 
 export function DissensusDetector() {
-  const { sampleName, backendReachable } = useManifold();
+  const { sampleName, backendReachable, modelFields } = useManifold();
   const [result, setResult] = useState<DissensusDetectorResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,7 +22,7 @@ export function DissensusDetector() {
       const response = await fetch("/api/backend/critique/dissensus-detector", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ sample_name: sampleName, k: 20 }),
+        body: JSON.stringify({ ...modelFields, sample_name: sampleName, k: 20 }),
       });
       if (!response.ok) {
         const data = await response.json().catch(() => null);
@@ -34,7 +34,7 @@ export function DissensusDetector() {
     } finally {
       setLoading(false);
     }
-  }, [sampleName]);
+  }, [sampleName, modelFields]);
 
   return (
     <section className="card-editorial p-6">

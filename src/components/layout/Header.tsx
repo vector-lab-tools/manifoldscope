@@ -5,6 +5,7 @@ import { useState } from "react";
 import { VERSION } from "@/lib/version";
 import { useManifold } from "@/context/ManifoldContext";
 import { HelpDialog } from "./HelpDialog";
+import { ModelDialog } from "./ModelDialog";
 import type { TabGroup } from "@/types/manifold";
 
 const FAMILY_URL = "https://vector-lab-tools.github.io";
@@ -21,8 +22,12 @@ const TAB_LABELS: Record<TabGroup, string> = {
  *   [VL mark] Vector Lab │ [tool icon] Manifoldscope │ active tab  …  v0.x · ● backend · Help
  */
 export function Header({ activeTab }: { activeTab: TabGroup }) {
-  const { backendReachable, backendStatus } = useManifold();
+  const { backendReachable, backendStatus, modelId } = useManifold();
   const [helpOpen, setHelpOpen] = useState(false);
+  const [modelOpen, setModelOpen] = useState(false);
+  const activeModel =
+    modelId || backendStatus?.default_model_id || "default model";
+  const activeModelShort = activeModel.split("/").pop();
 
   return (
     <>
@@ -91,6 +96,14 @@ export function Header({ activeTab }: { activeTab: TabGroup }) {
             ● backend {backendReachable ? "ready" : "offline"}
           </span>
           <button
+            onClick={() => setModelOpen(true)}
+            className="normal-case tracking-normal transition-colors hover:text-ink"
+            title={`Embedding model: ${activeModel}. Click to type a different one.`}
+          >
+            Model: <span className="font-mono">{activeModelShort}</span>
+            {modelId ? " (custom)" : ""}
+          </button>
+          <button
             onClick={() => setHelpOpen(true)}
             className="transition-colors hover:text-ink"
             title="About Manifoldscope and the Vector Lab"
@@ -100,6 +113,7 @@ export function Header({ activeTab }: { activeTab: TabGroup }) {
         </div>
       </header>
       <HelpDialog open={helpOpen} onClose={() => setHelpOpen(false)} />
+      <ModelDialog open={modelOpen} onClose={() => setModelOpen(false)} />
     </>
   );
 }

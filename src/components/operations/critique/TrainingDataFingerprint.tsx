@@ -16,7 +16,7 @@ const PALETTE = [
 ];
 
 export function TrainingDataFingerprint() {
-  const { sampleName, backendReachable } = useManifold();
+  const { sampleName, backendReachable, modelFields } = useManifold();
   const [result, setResult] = useState<TrainingDataFingerprintResult | null>(
     null,
   );
@@ -33,6 +33,7 @@ export function TrainingDataFingerprint() {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({
+            ...modelFields,
             sample_name: sampleName,
             k: 20,
             temperature: 0.1,
@@ -49,7 +50,7 @@ export function TrainingDataFingerprint() {
     } finally {
       setLoading(false);
     }
-  }, [sampleName]);
+  }, [sampleName, modelFields]);
 
   // Colour each sample point by its dominant genre index.
   const dominantIdx =
