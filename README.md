@@ -324,7 +324,7 @@ Heavy visualisations (Plotly 3D scatter, Three.js persistent-homology scenes) ar
 
 ## Acknowledgements
 
-Built at Copenhagen Business School, Denmark, during an Otto Mønsted Visiting Professorship in 2026. The support of the Otto Mønsted Foundation is gratefully acknowledged.
+Built at Copenhagen Business School, Denmark, during an Otto Mønsted Visiting Professorship in 2026. The support of the Otto Mønsted Fond (grant 25-12-1849) is gratefully acknowledged.
 
 Concept and Design by David M. Berry, implemented with Claude Code 4.6. Design system adapted from the [CCS Workbench](https://github.com/dmberry/ccs-wb). Manifoldscope shares its editorial design system, geometry library, NDJSON streaming, provenance plumbing, and FastAPI proxy pattern with its sibling instruments [Vectorscope](https://github.com/vector-lab-tools/vectorscope), [Manifold Atlas](https://github.com/vector-lab-tools/manifold-atlas), [Theoryscope](https://github.com/vector-lab-tools/theoryscope), and [LLMbench](https://github.com/vector-lab-tools/LLMbench).
 
