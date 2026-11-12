@@ -70,7 +70,7 @@ from embed.sentence_transformers import DEFAULT_MODEL_ID, ModelLoadError
 from operations.metric_archaeology import DEFAULT_COMPARISON_MODEL
 from sample.loader import AVAILABLE as AVAILABLE_SAMPLES
 
-app = FastAPI(title="Manifoldscope Backend", version="0.4.0")
+app = FastAPI(title="Manifoldscope Backend", version="0.5.3")
 
 app.add_middleware(
     CORSMiddleware,
@@ -199,7 +199,7 @@ async def status() -> Dict[str, Any]:
     return {
         "status": "ok",
         "tool": "manifoldscope",
-        "version": "0.4.0",
+        "version": "0.5.3",
         "phase": "2a",
         "samples_available": AVAILABLE_SAMPLES,
         "default_model_id": DEFAULT_MODEL_ID,
