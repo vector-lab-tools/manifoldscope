@@ -71,10 +71,10 @@ export function Header({ activeTab }: { activeTab: TabGroup }) {
           </h1>
         </div>
 
-        <div className="h-4 w-px bg-parchment-dark/60" aria-hidden="true" />
+        <div className="hidden h-4 w-px bg-parchment-dark/60 sm:block" aria-hidden="true" />
 
         {/* Sub-label: current tab */}
-        <span className="text-caption uppercase tracking-wide text-slate">
+        <span className="hidden text-caption uppercase tracking-wide text-slate sm:inline">
           {TAB_LABELS[activeTab]}
         </span>
 
@@ -82,7 +82,7 @@ export function Header({ activeTab }: { activeTab: TabGroup }) {
 
         {/* Right-hand controls */}
         <div className="flex items-center gap-4 font-sans text-caption uppercase tracking-wide text-slate">
-          <span>v{VERSION}</span>
+          <span className="hidden sm:inline">v{VERSION}</span>
           <span
             className={
               backendReachable ? "text-success-600" : "text-error-600"
@@ -97,11 +97,14 @@ export function Header({ activeTab }: { activeTab: TabGroup }) {
           </span>
           <button
             onClick={() => setModelOpen(true)}
-            className="normal-case tracking-normal transition-colors hover:text-ink"
+            className="whitespace-nowrap normal-case tracking-normal transition-colors hover:text-ink"
             title={`Embedding model: ${activeModel}. Click to type a different one.`}
           >
-            Model: <span className="font-mono">{activeModelShort}</span>
-            {modelId ? " (custom)" : ""}
+            Model
+            <span className="hidden md:inline">
+              : <span className="font-mono">{activeModelShort}</span>
+              {modelId ? " (custom)" : ""}
+            </span>
           </button>
           <button
             onClick={() => setHelpOpen(true)}

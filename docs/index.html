@@ -126,7 +126,7 @@ uvicorn main:app --reload --port 8000</code></pre>
   <p>Open <a href="http://localhost:3000">http://localhost:3000</a>. The default sample (Philosophy of Technology concept list) loads automatically. Click <strong>Measure → Intrinsic Dimension → Run</strong> for a first result.</p>
 
   <div class="note">
-    <strong>If the header shows "Backend offline".</strong> The frontend is up but the FastAPI server on port 8000 is not reachable. Check the backend terminal for a stack trace, then confirm with <code>curl http://localhost:8000/health</code>.
+    <strong>If the header shows "Backend offline".</strong> The frontend is up but the FastAPI server on port 8000 is not reachable. Check the backend terminal for a stack trace, then confirm with <code>curl http://localhost:8000/status</code>.
   </div>
 </section>
 
@@ -228,7 +228,7 @@ uvicorn main:app --reload --port 8000</code></pre>
       </div>
       <p class="where">built in · nothing to configure</p>
       <p class="model-hint">Default: <code>sentence-transformers/all-MiniLM-L6-v2</code> (384d). First run downloads ~90 MB to <code>~/.cache/huggingface/</code>.</p>
-      <p class="gotcha"><strong>Other models:</strong> click <strong>Model</strong> in the app header and type any sentence-transformers or Hugging Face model id. Blank or <em>Reset to defaults</em> returns to MiniLM. The backend default can also be set with <code>MANIFOLDSCOPE_MODEL_ID</code>.</p>
+      <p class="gotcha"><strong>Other models:</strong> click <strong>Model</strong> in the app header and type any sentence-transformers or Hugging Face model id. Blank fields, or <em>Clear to defaults</em> then <em>Save</em>, return to MiniLM. The backend default can also be set with <code>MANIFOLDSCOPE_MODEL_ID</code>.</p>
     </div>
 
   </div>
@@ -306,7 +306,7 @@ ollama pull embeddinggemma      # 768d, Google</code></pre>
   </div>
 
   <h4>"Backend offline" in the header</h4>
-  <p>The frontend cannot reach <code>http://localhost:8000</code>. Check the backend terminal, then <code>curl http://localhost:8000/health</code>. If the backend is running on a different host or port, set <code>MANIFOLDSCOPE_BACKEND_URL</code> before <code>npm run dev</code>.</p>
+  <p>The frontend cannot reach <code>http://localhost:8000</code>. Check the backend terminal, then <code>curl http://localhost:8000/status</code>. If the backend is running on a different host or port, set <code>MANIFOLDSCOPE_BACKEND_URL</code> before <code>npm run dev</code>.</p>
 
   <h4>"ModuleNotFoundError: No module named 'ripser'"</h4>
   <p>Ripser needs a working C compiler. On macOS: <code>xcode-select --install</code>. On Debian/Ubuntu: <code>apt install build-essential</code>. Then re-run <code>./setup.sh</code>.</p>

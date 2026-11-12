@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useManifold } from "@/context/ManifoldContext";
 
 /**
@@ -16,17 +16,7 @@ export function ModelDialog({
   open: boolean;
   onClose: () => void;
 }) {
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
-
   if (!open) return null;
-
   // Mounted only while open, so the drafts start from the saved values each time.
   return <ModelDialogBody onClose={onClose} />;
 }
@@ -41,6 +31,10 @@ function ModelDialogBody({ onClose }: { onClose: () => void }) {
   } = useManifold();
   const [draft, setDraft] = useState(modelId);
   const [comparisonDraft, setComparisonDraft] = useState(comparisonModelId);
+  const [confirming, setConfirming] = useState(false);
+
+  const dirty =
+    draft.trim() !== modelId || comparisonDraft.trim() !== comparisonModelId;
 
   const defaultModel =
     backendStatus?.default_model_id ?? "sentence-transformers/all-MiniLM-L6-v2";
@@ -54,44 +48,66 @@ function ModelDialogBody({ onClose }: { onClose: () => void }) {
     onClose();
   };
 
-  const reset = () => {
-    setDraft("");
-    setComparisonDraft("");
-    setModelId("");
-    setComparisonModelId("");
-  };
+  const requestClose = useCallback(() => {
+    if (dirty) setConfirming(true);
+    else onClose();
+  }, [dirty, onClose]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      if (confirming) setConfirming(false);
+      else requestClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [confirming, requestClose]);
+
+  const inputClass =
+    "mt-1 w-full rounded border border-parchment px-3 py-2 font-mono text-body-sm text-ink placeholder:text-slate/60 focus:border-ink focus:outline-none";
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center bg-ink/30 px-4 pt-24 animate-fade-in"
-      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/30 p-4 animate-fade-in"
+      onClick={requestClose}
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="model-dialog-title"
-        className="card-editorial w-full max-w-lg p-6"
+        className="card-editorial relative flex max-h-[90vh] w-full max-w-lg flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2
-          id="model-dialog-title"
-          className="font-display text-body-lg font-bold text-ink"
-        >
-          Embedding model
-        </h2>
-        <p className="mt-2 text-body-sm text-slate">
-          Type any sentence-transformers or Hugging Face embedding model id.
-          Leave a field blank to use the backend default. The first run with a
-          new model downloads it, which can take a minute.
-        </p>
+        <div className="flex shrink-0 items-center justify-between border-b border-parchment px-6 py-4">
+          <h2
+            id="model-dialog-title"
+            className="font-display text-display-md text-ink"
+          >
+            Embedding model
+          </h2>
+          <button
+            onClick={requestClose}
+            className="font-sans text-caption uppercase tracking-widest text-slate hover:text-ink"
+            aria-label="Close"
+          >
+            × close
+          </button>
+        </div>
 
         <form
-          className="mt-4 space-y-4"
+          id="model-form"
+          className="min-h-0 flex-1 space-y-4 overflow-y-auto px-6 py-5"
           onSubmit={(e) => {
             e.preventDefault();
             save();
           }}
         >
+          <p className="text-body-sm text-slate">
+            Type any sentence-transformers or Hugging Face embedding model id.
+            Leave a field blank to use the backend default. The first run with a
+            new model downloads it, which can take a minute.
+          </p>
+
           <label className="block">
             <span className="text-caption uppercase tracking-wide text-slate">
               Model (all operations)
@@ -104,7 +120,7 @@ function ModelDialogBody({ onClose }: { onClose: () => void }) {
               spellCheck={false}
               autoComplete="off"
               autoFocus
-              className="mt-1 w-full rounded border border-parchment px-3 py-2 font-mono text-body-sm text-ink placeholder:text-slate/60 focus:border-ink focus:outline-none"
+              className={inputClass}
             />
           </label>
 
@@ -119,7 +135,7 @@ function ModelDialogBody({ onClose }: { onClose: () => void }) {
               placeholder={defaultComparison}
               spellCheck={false}
               autoComplete="off"
-              className="mt-1 w-full rounded border border-parchment px-3 py-2 font-mono text-body-sm text-ink placeholder:text-slate/60 focus:border-ink focus:outline-none"
+              className={inputClass}
             />
           </label>
 
@@ -129,31 +145,78 @@ function ModelDialogBody({ onClose }: { onClose: () => void }) {
             <code>Qwen/Qwen3-Embedding-0.6B</code>
           </p>
 
-          <div className="flex items-center justify-between pt-2">
+          <button
+            type="button"
+            onClick={() => {
+              setDraft("");
+              setComparisonDraft("");
+            }}
+            className="text-caption uppercase tracking-wide text-slate hover:text-ink"
+          >
+            Clear to defaults
+          </button>
+        </form>
+
+        <div className="flex shrink-0 items-center justify-between gap-2 border-t border-parchment px-6 py-3">
+          <span className="text-caption text-burgundy" aria-live="polite">
+            {dirty ? "Unsaved changes" : ""}
+          </span>
+          <div className="flex gap-2">
             <button
               type="button"
-              onClick={reset}
-              className="text-caption uppercase tracking-wide text-slate hover:text-ink"
+              onClick={onClose}
+              className="rounded border border-parchment px-4 py-1.5 text-body-sm text-slate hover:text-ink"
             >
-              Reset to defaults
+              Cancel
             </button>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={onClose}
-                className="rounded border border-parchment px-4 py-1.5 text-body-sm text-slate hover:text-ink"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="rounded bg-burgundy px-4 py-1.5 text-body-sm text-white hover:opacity-90"
-              >
-                Use model
-              </button>
+            <button
+              type="submit"
+              form="model-form"
+              className="rounded bg-burgundy px-4 py-1.5 text-body-sm text-white hover:opacity-90"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+
+        {confirming && (
+          <div
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="model-confirm-title"
+            className="absolute inset-0 flex items-center justify-center rounded bg-ink/20 p-6"
+          >
+            <div className="card-editorial w-full max-w-sm p-5">
+              <p id="model-confirm-title" className="text-body text-ink">
+                You have unsaved changes to the model settings.
+              </p>
+              <div className="mt-4 flex flex-wrap justify-end gap-2">
+                <button
+                  type="button"
+                  autoFocus
+                  onClick={() => setConfirming(false)}
+                  className="rounded border border-parchment px-3 py-1.5 text-body-sm text-slate hover:text-ink"
+                >
+                  Keep editing
+                </button>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="rounded border border-parchment px-3 py-1.5 text-body-sm text-slate hover:text-ink"
+                >
+                  Discard
+                </button>
+                <button
+                  type="button"
+                  onClick={save}
+                  className="rounded bg-burgundy px-3 py-1.5 text-body-sm text-white hover:opacity-90"
+                >
+                  Save
+                </button>
+              </div>
             </div>
           </div>
-        </form>
+        )}
       </div>
     </div>
   );

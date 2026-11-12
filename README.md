@@ -191,7 +191,7 @@ Open [http://localhost:3000](http://localhost:3000). The default embedding model
 
 ### Configuring Providers
 
-**Choosing a model.** Click **Model** in the header and type any sentence-transformers or Hugging Face embedding model id (for example `BAAI/bge-small-en-v1.5`). The choice is stored in your browser and sent with every run; a second field sets the comparison model for Metric Archaeology. Leave the fields blank, or click **Reset to defaults**, to go back to MiniLM and MPNet. If a model id cannot be loaded, the operation panel shows the error and the rest of the instrument keeps working. To change the backend defaults without touching code, set environment variables before starting the backend:
+**Choosing a model.** Click **Model** in the header and type any sentence-transformers or Hugging Face embedding model id (for example `BAAI/bge-small-en-v1.5`). The choice is stored in your browser and sent with every run; a second field sets the comparison model for Metric Archaeology. Leave the fields blank, or click **Clear to defaults** and then **Save**, to go back to MiniLM and MPNet. If a model id cannot be loaded, the operation panel shows the error and the rest of the instrument keeps working. To change the backend defaults without touching code, set environment variables before starting the backend:
 
 ```bash
 MANIFOLDSCOPE_MODEL_ID=BAAI/bge-small-en-v1.5 \
