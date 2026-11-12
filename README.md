@@ -152,7 +152,7 @@ Manifoldscope is two coordinated processes: a Python backend for the heavier num
 - **Python 3.11+** for the FastAPI backend.
 - **Node.js 18+** (20 LTS recommended) and **npm**.
 - **Git**, to clone the repository.
-- At least one of: an embedding provider API key (OpenAI, Voyage, Google, or Cohere), a HuggingFace account with an Access Token, or [Ollama](https://ollama.com/) running locally with an embedding model pulled.
+- No API key is needed for the default route: the backend runs MiniLM locally via `sentence-transformers`. Hosted embedding models (OpenAI, Voyage, Google, Cohere, Hugging Face) need a key from that provider; [Ollama](https://ollama.com/) runs locally without one.
 
 ### Installation
 
@@ -190,6 +190,8 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000). Configure at least one embedding provider in Settings. Load the default sample (Philosophy of Technology concept list) and click into the **Measure** tab to run Intrinsic Dimension Field, or the **Critique** tab to run the Market-Colonisation Index.
 
 ### Configuring Providers
+
+Step-by-step key setup for each provider is on the [Manifoldscope docs page](https://vector-lab-tools.github.io/manifoldscope/#api-keys). For problems with API keys, local models and browser support across all the Vector Lab tools, see the [Vector Lab FAQ](https://vector-lab-tools.github.io/faq.html).
 
 Provider registry lives in `public/models/` as one Markdown file per provider. Add or remove models by editing the corresponding file. No rebuild required.
 
