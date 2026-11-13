@@ -7,6 +7,7 @@ import { VERSION } from "@/lib/version";
 const FAMILY_URL = "https://vector-lab-tools.github.io";
 const DOCS_URL = "https://vector-lab-tools.github.io/manifoldscope/";
 const REPO_URL = "https://github.com/vector-lab-tools/manifoldscope";
+const CONCEPT_DOI = "10.5281/zenodo.23714913";
 
 type HelpTab =
   | "start"
@@ -268,6 +269,29 @@ export function HelpDialog({
                   Built at Copenhagen Business School, Denmark, during an Otto Mønsted
                   Visiting Professorship in 2026. The support of the Otto Mønsted Fond
                   (grant 25-12-1849) is gratefully acknowledged.
+                </p>
+                <p className="border-t border-parchment pt-3 text-body-sm">
+                  Cite: Berry, D. M. (2026) &lsquo;Vector Theory: Epistemology, Political
+                  Economy, and Probabilistic Computation&rsquo;,{" "}
+                  <em>Philosophy &amp; Technology</em>, 39.{" "}
+                  <a
+                    href="https://doi.org/10.1007/s13347-026-01162-w"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-burgundy hover:underline"
+                  >
+                    doi:10.1007/s13347-026-01162-w
+                  </a>
+                  . Tool: Manifoldscope v{VERSION},{" "}
+                  <a
+                    href={`https://doi.org/${CONCEPT_DOI}`}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-burgundy hover:underline"
+                  >
+                    doi:{CONCEPT_DOI}
+                  </a>
+                  .
                 </p>
               </>
             )}

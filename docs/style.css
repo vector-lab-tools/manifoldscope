@@ -109,6 +109,9 @@ pre {
 
 pre code { background: none; padding: 0; }
 
+p code, li > code { overflow-wrap: anywhere; }
+pre { max-width: 100%; }
+
 .eyebrow {
   font-family: var(--mono);
   font-size: 11px;
@@ -149,6 +152,30 @@ pre code { background: none; padding: 0; }
   border: none;
 }
 .wordmark img { width: 22px; height: 22px; }
+.wordmark { white-space: nowrap; }
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.crumb {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: none;
+  white-space: nowrap;
+}
+.crumb:hover { color: var(--accent); }
+
+.eyebrow a {
+  color: inherit;
+  border-bottom: 1px solid var(--rule);
+}
+.eyebrow a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 .wordmark em {
   font-style: normal;
   color: var(--accent);
@@ -167,6 +194,7 @@ pre code { background: none; padding: 0; }
 .topnav a {
   color: var(--muted);
   border: none;
+  white-space: nowrap;
 }
 .topnav a:hover { color: var(--accent); }
 
@@ -414,6 +442,9 @@ h4 {
 }
 
 /* Screenshots */
+
+figure a,
+.hero-shot a { display: block; border: none; }
 
 figure {
   margin: 24px 0 32px;

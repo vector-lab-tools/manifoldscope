@@ -141,8 +141,8 @@ function ModelDialogBody({ onClose }: { onClose: () => void }) {
 
           <p className="text-caption text-slate">
             Examples: <code>BAAI/bge-small-en-v1.5</code>,{" "}
-            <code>intfloat/multilingual-e5-large</code>,{" "}
-            <code>Qwen/Qwen3-Embedding-0.6B</code>
+            <code>sentence-transformers/all-MiniLM-L12-v2</code>,{" "}
+            <code>sentence-transformers/all-mpnet-base-v2</code>
           </p>
 
           <button

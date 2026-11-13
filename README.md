@@ -195,7 +195,7 @@ Open [http://localhost:3000](http://localhost:3000). The default embedding model
 
 ```bash
 MANIFOLDSCOPE_MODEL_ID=BAAI/bge-small-en-v1.5 \
-MANIFOLDSCOPE_COMPARISON_MODEL_ID=intfloat/multilingual-e5-large \
+MANIFOLDSCOPE_COMPARISON_MODEL_ID=sentence-transformers/all-MiniLM-L12-v2 \
 uvicorn main:app --reload --port 8000
 ```
 
@@ -330,7 +330,11 @@ Concept and Design by David M. Berry, implemented with Claude Code 4.6. Design s
 
 ## Citing
 
-Each GitHub release is archived at Zenodo. The concept DOI below always resolves to the latest archived version; version-specific DOIs are listed on the Zenodo record.
+The preferred citation for every Vector Lab tool is the article:
+
+Berry, D. M. (2026) 'Vector Theory: Epistemology, Political Economy, and Probabilistic Computation', *Philosophy & Technology*, 39. [https://doi.org/10.1007/s13347-026-01162-w](https://doi.org/10.1007/s13347-026-01162-w)
+
+Cite the software as a second reference. Each GitHub release is archived at Zenodo; the concept DOI below always resolves to the latest archived version, and version-specific DOIs are listed on the Zenodo record.
 
 Berry, D. M. (2026) *Manifoldscope* (Version 0.5.3) [Software]. Zenodo. [https://doi.org/10.5281/zenodo.23714913](https://doi.org/10.5281/zenodo.23714913)
 
